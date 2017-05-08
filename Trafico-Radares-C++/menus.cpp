@@ -13,6 +13,7 @@ namespace std {
 menus::menus() {
 	// TODO Auto-generated constructor stub
 
+	cout <<"Se han generado los menus con exito" << endl;
 }
 
 menus::~menus() {

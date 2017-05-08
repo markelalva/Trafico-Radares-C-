@@ -5,10 +5,13 @@
  *      Author: Markel
  */
 
-
+#include "menus.h"
 namespace std {
 
 int main(){
+menus *m = new menus();
+
+m->MenuPrincipal();
 
 
 
