@@ -28,8 +28,9 @@ int menus::MenuPrincipal(){
 	cout << "1- Consultar estadísticas" << endl;
 	cout << "2- Generar multas" << endl;
 	cout << "3- Consultar multas" << endl;
+	cout << "4- Salir" << endl;
 	cin >> opcion;
-	while (opcion <1 || opcion >3){
+	while (opcion <1 || opcion >4){
 		cout << "Introduce un valor valido" << endl;
 		cin >> opcion;
 
@@ -50,8 +51,9 @@ int menus::MenuEstadisticas(){
 	cout << "6- Consultar el usuario con menos multas" << endl;
 	cout << "7- Consultar la mayor multa" << endl;
 	cout << "8- Consultar el promedio de multas por radar" << endl;
+	cout << "9- Salir" << endl;
 	cin >> opcion;
-	while (opcion <1 || opcion >8){
+	while (opcion <1 || opcion >9){
 		cout << "Introduce un valor valido" << endl;
 		cin >> opcion;
 
@@ -68,9 +70,9 @@ int menus::ConsultarMultas(){
 	cout << "2- Consultar las multas de un usuario" << endl;
 	cout << "3- Consultar el total del dinero obtenido mediante multas" << endl;
 	cout << "4- Consultar el total de puntos detraidos mediante multas" << endl;
-
+	cout << "5- Salir" << endl;
 	cin >> opcion;
-	while (opcion <1 || opcion >4){
+	while (opcion <1 || opcion >5){
 		cout << "Introduce un valor valido" << endl;
 		cin >> opcion;
 
