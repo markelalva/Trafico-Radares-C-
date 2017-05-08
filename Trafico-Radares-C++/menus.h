@@ -14,10 +14,10 @@ class menus {
 public:
 	menus();
 	virtual ~menus();
-	void MenuPrincipal();
-	void MenuEstadisticas();
-	void MenuGenerarMulta();
-	void ConsultarMultas();
+	int MenuPrincipal();
+	int MenuEstadisticas();
+	int MenuGenerarMulta();
+	int ConsultarMultas();
 };
 
 } /* namespace std */

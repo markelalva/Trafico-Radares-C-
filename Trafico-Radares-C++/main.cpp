@@ -4,9 +4,9 @@
  *  Created on: 7 may. 2017
  *      Author: Markel
  */
-
+#include <iostream>
 #include "menus.h"
-namespace std {
+using namespace std;
 
 int main(){
 menus *m = new menus();
@@ -14,7 +14,7 @@ menus *m = new menus();
 m->MenuPrincipal();
 
 
-
+return 0;
 }
 
-} /* namespace std */
+ /* namespace std */
