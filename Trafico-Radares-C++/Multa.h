@@ -7,6 +7,8 @@
 
 #ifndef MULTA_H_
 #define MULTA_H_
+#include <string.h>
+#include <iostream>
 
 namespace std {
 
@@ -18,8 +20,9 @@ int puntos;
 
 public:
 	Multa();
-	Multa(Multa multa);
+	Multa(Multa &multa);
 	virtual ~Multa();
+	void visualizarMulta();
 };
 
 } /* namespace std */

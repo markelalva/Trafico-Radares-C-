@@ -28,7 +28,7 @@ public:
 	int borrarTablaPasos();
 	int borrarTablaRadares();
 
-	int insertPaso();
+	int insertPaso(int numeroPaso, int numeroRadar, char* matricula, int velocidadCoche);
 	int deletePaso(int numeroPaso);
 
 	int insertRadar(int numeroRadar, int velocidad, double margen);
