@@ -24,8 +24,8 @@ int menus::MenuPrincipal(){
 	//Menu principal
 	int opcion =0;
 	cout << "Bienvenido al menu principal" << endl;
-	cout << "Elija una opción" << endl;
-	cout << "1- Consultar estadísticas" << endl;
+	cout << "Elija una opciï¿½n" << endl;
+	cout << "1- Consultar estadï¿½sticas" << endl;
 	cout << "2- Generar multas" << endl;
 	cout << "3- Consultar multas" << endl;
 	cout << "4- Salir" << endl;
@@ -80,6 +80,7 @@ int menus::ConsultarMultas(){
 
 	return opcion;
 }
+
 
 
 } /* namespace std */

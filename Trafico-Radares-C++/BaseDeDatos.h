@@ -23,10 +23,16 @@ public:
 	int abrirBD();
 	int cerrarBD();
 
-	int crearTabla();
+	int crearTablaPasos();
+	int crearTablaRadares();
+	int borrarTablaPasos();
+	int borrarTablaRadares();
 
-	void insertPaso();
-	void deletePaso();
+	int insertPaso();
+	int deletePaso(int numeroPaso);
+
+	int insertRadar(int numeroRadar, int velocidad, double margen);
+	int deleteRadar(int numeroRadar);
 
 	void selectPaso();
 
