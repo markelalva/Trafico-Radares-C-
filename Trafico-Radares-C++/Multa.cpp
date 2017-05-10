@@ -22,7 +22,7 @@ Multa::~Multa() {
 	delete [] matricula;
 }
 
-Multa::Multa(Multa &multa){
+Multa::Multa( const Multa &multa){
 	this->importe = multa.importe;
 	this->puntos = multa.puntos;
 	this->matricula = new char [strlen(multa.matricula) +1];

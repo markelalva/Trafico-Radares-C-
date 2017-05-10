@@ -20,7 +20,7 @@ int puntos;
 
 public:
 	Multa();
-	Multa(Multa &multa);
+	Multa(const Multa &multa);
 	virtual ~Multa();
 	void visualizarMulta();
 };

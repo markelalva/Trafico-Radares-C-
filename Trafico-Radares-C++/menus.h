@@ -16,7 +16,7 @@ public:
 	virtual ~menus();
 	int MenuPrincipal();
 	int MenuEstadisticas();
-	int MenuGenerarMulta();
+	void MenuGenerarMulta();
 	int ConsultarMultas();
 };
 

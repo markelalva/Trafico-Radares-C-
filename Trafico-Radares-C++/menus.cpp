@@ -63,6 +63,24 @@ int menus::MenuEstadisticas(){
 
 }
 
+void menus::MenuGenerarMulta(){
+	int opcion;
+	cout << "Esta en el menu de Generar Multas" << endl;
+	//AQUI VA LA FUNCIONALIDAD (PENDIENTE)
+
+
+	cout << "Todas las multas han sido generadas" << endl;
+	cout << "Presione 0 para volver al menu principal" << endl;
+	cin >> opcion;
+
+	while (opcion !=0){
+	cout << "ERROR! Presione 0 para volver al menu principal" << endl;
+	cin >> opcion;
+	}
+
+
+}
+
 int menus::ConsultarMultas(){
 	int opcion =0;
 	cout << "Estas en el menu de consulta de multas" << endl;

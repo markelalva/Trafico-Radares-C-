@@ -6,10 +6,17 @@
  */
 #include <iostream>
 #include "menus.h"
+#include "BaseDeDatos.h"
 using namespace std;
 
 int main(){
 menus *m = new menus();
+//Cargamos la BD
+
+
+BaseDeDatos *bd = new BaseDeDatos("Base de Datos");
+bd->abrirBD(); //Probar
+bd->cerrarBD(); //Probar
 
 int opcion = m->MenuPrincipal();
 
@@ -17,7 +24,6 @@ do{
 switch (opcion){
 int opcion1;
 int opcion2;
-int opcion3;
 case 1:
 opcion1 = m->MenuEstadisticas();
 switch (opcion1){
@@ -45,12 +51,12 @@ case 9:
 break;
 
 case 2:
-//opcion 2 = m->MenuGenerarMulta();
+m->MenuGenerarMulta();
 break;
 
 case 3:
-opcion3 = m->ConsultarMultas();
-switch(opcion3){
+opcion2 = m->ConsultarMultas();
+switch(opcion2){
 case 1:
 	break;
 case 2:

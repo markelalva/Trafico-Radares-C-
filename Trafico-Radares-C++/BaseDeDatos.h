@@ -36,7 +36,7 @@ public:
 
 	void selectPaso();
 
-	BaseDeDatos(char * nombre);
+	BaseDeDatos(const char * nombre);
 	virtual ~BaseDeDatos();
 };
 

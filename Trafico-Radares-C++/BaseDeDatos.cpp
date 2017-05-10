@@ -10,7 +10,7 @@
 
 namespace std {
 
-BaseDeDatos::BaseDeDatos(char *nombre) {
+BaseDeDatos::BaseDeDatos(const char *nombre) {
 	// TODO Auto-generated constructor stub
 	this->nombreBD = new char[15];
 	strcpy(this->nombreBD, nombre);
