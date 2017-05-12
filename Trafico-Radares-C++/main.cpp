@@ -9,23 +9,33 @@
 #include "BaseDeDatos.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "estructuras.h"
 using namespace std;
-FILE *pasos;
-Paso *listaPasos;
-int numeroPasos;
+FILE *radares;
+Radar *listaRadares;
+int numeroRadares;
 int main(){
 menus *m = new menus();
 //Cargamos la BD
-
-
-//Cargamos los pasos en un array desde el fichero
-
-pasos = fopen("pasos.dat", "rb");
-numeroPasos = fgetc(pasos);
-listaPasos = new Paso[numeroPasos +1];
-fread (listaPasos,sizeof(Paso),numeroPasos,pasos);
-
 BaseDeDatos *bd = new BaseDeDatos("Base de Datos");
+
+//Cargamos los radares en un array desde el fichero
+
+radares = fopen("radares.dat", "rb");
+numeroRadares = fgetc(radares);
+cout << "El numero de radares es : "<< numeroRadares << endl;
+listaRadares= new Radar[numeroRadares];
+
+fread(listaRadares, sizeof(Radar), numeroRadares, radares);
+
+for(int i =0; i<numeroRadares; i++){
+bd->mostrarRadar(listaRadares[i]);
+}
+
+
+
+
+
 bd->abrirBD(); //Probar
 
 

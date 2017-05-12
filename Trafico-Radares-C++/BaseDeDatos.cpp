@@ -146,7 +146,7 @@ int BaseDeDatos::insertRadar(int numeroRadar, int velocidad, double margen) {
 	char * error;
 
 	//Cargamos en un String porque no sabemos el tamaño que vamos a encesitar
-	orden = "insert into Radares values(" + std::to(numeroRadar) + "," + std::to_string(velocidad) + "," +  std::to_string(margen)+ ");";
+	orden = "insert into Radares values(" + std::to_string(numeroRadar) + "," + std::to_string(velocidad) + "," +  std::to_string(margen)+ ");";
 
 
 	char *ordenDefinitiva;
@@ -166,6 +166,11 @@ int BaseDeDatos::insertRadar(int numeroRadar, int velocidad, double margen) {
 			cout << "Radar insertado correctamente" << endl;
 		}
 		return result;
+
+}
+
+void BaseDeDatos::mostrarRadar(Radar &radar){
+	cout << radar.numeroRadar << endl;
 
 }
 

@@ -7,6 +7,7 @@
 #include <string.h>
 #include "sqlite3.h"
 #include <iostream>
+#include "estructuras.h"
 #ifndef BASEDEDATOS_H_
 #define BASEDEDATOS_H_
 
@@ -35,6 +36,7 @@ public:
 	int deleteRadar(int numeroRadar);
 
 	void selectPaso();
+	void mostrarRadar(Radar &radar);
 
 	BaseDeDatos(const char * nombre);
 	virtual ~BaseDeDatos();
