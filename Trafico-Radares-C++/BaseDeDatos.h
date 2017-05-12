@@ -36,7 +36,9 @@ public:
 	int deleteRadar(int numeroRadar);
 
 	void selectPaso();
+
 	void mostrarRadar(Radar &radar);
+	void mostrarPaso(Paso &paso);
 
 	BaseDeDatos(const char * nombre);
 	virtual ~BaseDeDatos();

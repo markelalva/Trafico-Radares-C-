@@ -12,10 +12,13 @@
 #include "estructuras.h"
 using namespace std;
 FILE *radares;
+FILE *pasos;
 Radar *listaRadares;
+Paso *listaPasos;
 int numeroRadares;
+int numeroPasos;
 int main(){
-menus *m = new menus();
+
 //Cargamos la BD
 BaseDeDatos *bd = new BaseDeDatos("Base de Datos");
 
@@ -32,9 +35,21 @@ for(int i =0; i<numeroRadares; i++){
 bd->mostrarRadar(listaRadares[i]);
 }
 
+//Cargamos los pasos
+
+pasos = fopen("pasos.dat", "rb");
+numeroPasos = fgetc(pasos);
+cout << "El numero de pasos es : "<< numeroPasos << endl;
+listaPasos= new Paso[numeroPasos];
+
+fread(listaPasos, sizeof(Paso), numeroPasos, pasos);
+
+for(int i =0; i<numeroPasos; i++){
+bd->mostrarPaso(listaPasos[i]);
+}
 
 
-
+menus *m = new menus();
 
 bd->abrirBD(); //Probar
 

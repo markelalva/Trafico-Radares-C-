@@ -174,6 +174,11 @@ void BaseDeDatos::mostrarRadar(Radar &radar){
 
 }
 
+void BaseDeDatos::mostrarPaso(Paso &paso){
+	cout <<paso.numeroPaso << endl;
+
+}
+
 int BaseDeDatos::deleteRadar(int numeroRadar) {
 
 string orden;
