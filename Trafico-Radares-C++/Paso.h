@@ -7,10 +7,17 @@
 
 #ifndef PASO_H_
 #define PASO_H_
+#include <sys/timeb.h>
 
 namespace std {
 
 class Paso {
+
+int numeroPaso;
+int numeroRadar;
+char matricula[8];
+int velocidadCoche;
+struct timeb fecha;
 
 public:
 	Paso();

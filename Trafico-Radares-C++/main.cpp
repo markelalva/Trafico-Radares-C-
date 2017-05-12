@@ -7,16 +7,29 @@
 #include <iostream>
 #include "menus.h"
 #include "BaseDeDatos.h"
+#include <stdlib.h>
+#include <stdio.h>
 using namespace std;
-
+FILE *pasos;
+Paso *listaPasos;
+int numeroPasos;
 int main(){
 menus *m = new menus();
 //Cargamos la BD
 
 
+//Cargamos los pasos en un array desde el fichero
+
+pasos = fopen("pasos.dat", "rb");
+numeroPasos = fgetc(pasos);
+listaPasos = new Paso[numeroPasos +1];
+fread (listaPasos,sizeof(Paso),numeroPasos,pasos);
+
 BaseDeDatos *bd = new BaseDeDatos("Base de Datos");
 bd->abrirBD(); //Probar
-bd->cerrarBD(); //Probar
+
+
+
 
 int opcion = m->MenuPrincipal();
 
