@@ -19,10 +19,10 @@ int importe;
 int puntos;
 
 public:
-	Multa();
-	Multa(const Multa &multa);
-	virtual ~Multa();
-	void visualizarMulta();
+Multa(int velocidadcoche, int velocidadradar,char *matricula);
+Multa(const Multa &multa);
+virtual ~Multa();
+void visualizarMulta();
 };
 
 } /* namespace std */

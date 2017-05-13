@@ -6,7 +6,6 @@
  */
 
 #include "BaseDeDatos.h"
-#include "sqlite3.h"
 
 namespace std {
 
@@ -78,8 +77,8 @@ int BaseDeDatos::borrarTablaPasos() {
 
 
 int BaseDeDatos::crearTablaRadares() {
-	char* query =
-			"create table Radares( numeroRadar integer primary key not null, velocidadRadar integer not null)";
+	char *query =
+			"create table Radares( numeroRadar integer primary key not null, velocidadRadar integer not null, margen double not null)";
 	char* error = new char[100];
 	int result = sqlite3_exec(db, query, NULL, 0, &error);
 
@@ -108,14 +107,53 @@ int BaseDeDatos::borrarTablaRadares(){
 }
 
 
+int BaseDeDatos::crearTablaMultas(){
+	char *query =
+			"create table Multas( numeroMulta integer primary key not null, matricula integer not null, importe integer not null, puntos integer not null)";
+	char* error = new char[100];
+	int result = sqlite3_exec(db, query, NULL, 0, &error);
+
+	if (result != SQLITE_OK) {
+		cout << "Error al crear la tabla Multas " << error << endl;
+	} else {
+		cout << "Tabla Multas creada" << endl;
+	}
+	return result;
+
+
+}
+
+int BaseDeDatos::borrarTablaMultas(){
+	char * query;
+	char * error;
+	query = "drop table Multas";
+
+	int result = sqlite3_exec(db, query, NULL, 0, &error);
+
+	if (result != SQLITE_OK) {
+		cout << "Error al borrar la tabla Multas" << endl;
+	} else {
+		cout << "Tabla Multas borrada" << endl;
+	}
+	return result;
+}
+
+
+
 
 
 int BaseDeDatos::insertPaso(int numeroPaso, int numeroRadar, char* matricula, int velocidadCoche){
 	string orden;
 	char * error;
+	char *numeroPasoC;
+	sprintf(numeroPasoC,"%i", numeroPaso);
+	char *numeroRadarC;
+	sprintf(numeroRadarC,"%i", numeroRadar);
+	char *velocidadCocheC;
+	sprintf(velocidadCocheC,"%", velocidadCoche);
 
 		//Cargamos en un String porque no sabemos el tamaño que vamos a encesitar
-		orden = "insert into Pasos values(" + std::to_string(numeroPaso) + "," + std::to_string(numeroRadar) + ",'" + matricula + "'," + std::to_string(velocidadCoche) +");";
+		orden = "insert into Pasos values(" + numeroPasoC + "," + numeroRadarC + ",'" + matricula + "'," + velocidadCocheC +");";
 		char *ordenDefinitiva;
 		ordenDefinitiva = new char[orden.length() +1];
 
@@ -169,19 +207,13 @@ int BaseDeDatos::insertRadar(int numeroRadar, int velocidad, double margen) {
 
 }
 
-void BaseDeDatos::mostrarRadar(Radar &radar){
-	cout << radar.numeroRadar << endl;
 
-}
-
-void BaseDeDatos::mostrarPaso(Paso &paso){
-	cout <<paso.numeroPaso << endl;
-
-}
 
 int BaseDeDatos::deleteRadar(int numeroRadar) {
 
 string orden;
+char *numeroRadarC;
+sprintf(numeroRadarC,"%i", numeroRadar);
 orden = "delete from Radares WHERE numeroRadar = " + std::to_string(numeroRadar) +";";
 char *ordenDefinitiva;
 	ordenDefinitiva = new char[orden.length() +1];

@@ -69,7 +69,8 @@ void menus::MenuGenerarMulta(){
 	//AQUI VA LA FUNCIONALIDAD (PENDIENTE)
 
 
-	cout << "Todas las multas han sido generadas" << endl;
+
+	cout << "Todas las multas han sido generadas y almacenadas en la BD" << endl;
 	cout << "Presione 0 para volver al menu principal" << endl;
 	cin >> opcion;
 
