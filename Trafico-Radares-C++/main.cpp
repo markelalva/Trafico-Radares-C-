@@ -29,20 +29,14 @@ f = new funciones();
 
 radares = fopen("radares.dat", "rb");
 numeroRadares = fgetc(radares);
-cout << "El numero de radares es : "<< numeroRadares << endl;
 listaRadares= new Radar[numeroRadares];
 
 fread(listaRadares, sizeof(Radar), numeroRadares, radares);
-
-for(int i =0; i<numeroRadares; i++){
-	f->mostrarRadar(listaRadares[i]);
-}
 
 //Cargamos los pasos
 
 pasos = fopen("pasos.dat", "rb");
 numeroPasos = fgetc(pasos);
-cout << "El numero de pasos es : "<< numeroPasos << endl;
 listaPasos= new Paso[numeroPasos];
 
 fread(listaPasos, sizeof(Paso), numeroPasos, pasos);
@@ -60,21 +54,24 @@ bd->crearTablaRadares();
 //Cargamos los radares y los pasos en la BD
 	//Radares
 int i;
-for( i=0; i<numeroRadares; i++){
+/*for( i=0; i<numeroRadares; i++){
 bd->insertRadar(listaRadares[i].numeroRadar, listaRadares[i].velocidad, listaRadares[i].margen);
 }
 	//Pasos
 for(i=0; i<numeroPasos; i++){
 bd->insertPaso(listaPasos[i].numeroPaso, listaPasos[i].numeroRadar, listaPasos[i].matricula, listaPasos[i].velocidadCoche);
 }
-
+*/
+char *matricula  = new char [8];
+matricula= "99393FBF";
+bd->insertPaso(10, 12, matricula, 140);
 //Mostramos
 menus *m = new menus();
-
-
-int opcion = m->MenuPrincipal();
-
+int opcion;
 do{
+opcion = m->MenuPrincipal();
+
+
 switch (opcion){
 int opcion1;
 int opcion2;

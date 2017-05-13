@@ -13,12 +13,13 @@
 namespace std {
 
 class Multa {
-
+int numeroMulta;
 char *matricula;
 int importe;
 int puntos;
 
 public:
+Multa();
 Multa(int velocidadcoche, int velocidadradar,char *matricula);
 Multa(const Multa &multa);
 virtual ~Multa();

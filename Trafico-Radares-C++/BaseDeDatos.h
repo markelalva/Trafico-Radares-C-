@@ -44,6 +44,8 @@ public:
 	int deleteMulta();
 
 	void selectPaso();
+	void selectRadar(int numeroRadar);
+	void selectMulta(int numeroMulta);
 
 
 

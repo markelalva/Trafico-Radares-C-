@@ -9,6 +9,7 @@
 #define FUNCIONES_H_
 #include "estructuras.h"
 #include <iostream>
+#include "Multa.h"
 
 namespace std {
 
@@ -17,6 +18,7 @@ public:
 	funciones();
 	void mostrarRadar(Radar &radar);
 	void mostrarPaso(Paso &paso);
+	Multa comprobarPaso (Paso &paso);
 	virtual ~funciones();
 };
 

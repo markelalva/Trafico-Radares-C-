@@ -74,8 +74,6 @@ int BaseDeDatos::borrarTablaPasos() {
 	return result;
 }
 
-
-
 int BaseDeDatos::crearTablaRadares() {
 	char *query =
 			"create table Radares( numeroRadar integer primary key not null, velocidadRadar integer not null, margen double not null)";
@@ -91,7 +89,7 @@ int BaseDeDatos::crearTablaRadares() {
 
 }
 
-int BaseDeDatos::borrarTablaRadares(){
+int BaseDeDatos::borrarTablaRadares() {
 	char * query;
 	char * error;
 	query = "drop table Radares";
@@ -106,8 +104,7 @@ int BaseDeDatos::borrarTablaRadares(){
 	return result;
 }
 
-
-int BaseDeDatos::crearTablaMultas(){
+int BaseDeDatos::crearTablaMultas() {
 	char *query =
 			"create table Multas( numeroMulta integer primary key not null, matricula integer not null, importe integer not null, puntos integer not null)";
 	char* error = new char[100];
@@ -120,10 +117,9 @@ int BaseDeDatos::crearTablaMultas(){
 	}
 	return result;
 
-
 }
 
-int BaseDeDatos::borrarTablaMultas(){
+int BaseDeDatos::borrarTablaMultas() {
 	char * query;
 	char * error;
 	query = "drop table Multas";
@@ -138,92 +134,125 @@ int BaseDeDatos::borrarTablaMultas(){
 	return result;
 }
 
+int BaseDeDatos::insertPaso(int numeroPaso, int numeroRadar, char* matricula,
+		int velocidadCoche) {
+	char *error = new char[140];
+	char *query = new char[140];
+	strcpy(query, "insert into Pasos values(");
+	//Pasamos el numero de Paso a string
 
+	char *numeroPasoC = new char[4];
+	char *coma = new char[1]; //Para la coma
+	coma = ",";
+	char *apostrofe = new char[1];
+	apostrofe = "'";
+	sprintf(numeroPasoC, "%i", numeroPaso);
+	strcat(query, numeroPasoC);
+	strcat(query, coma);
+	char *numeroRadarC = new char[3];
+	sprintf(numeroRadarC, "%i", numeroRadar);
+	strcat(query, numeroRadarC);
+	strcat(query, coma);
+	strcat(query, apostrofe);
+	strcat(query, matricula);
+	strcat(query, apostrofe);
+	strcat(query, coma);
+	char *velocidadCocheC = new char[3];
+	sprintf(velocidadCocheC, "%i", velocidadCoche);
+	strcat(query, velocidadCocheC);
+	char *final = new char[2];
+	final = ");";
+	strcat(query, final);
 
+	int result = sqlite3_exec(db, query, NULL, 0, &error);
 
-
-int BaseDeDatos::insertPaso(int numeroPaso, int numeroRadar, char* matricula, int velocidadCoche){
-	string orden;
-	char * error;
-	char *numeroPasoC;
-	sprintf(numeroPasoC,"%i", numeroPaso);
-	char *numeroRadarC;
-	sprintf(numeroRadarC,"%i", numeroRadar);
-	char *velocidadCocheC;
-	sprintf(velocidadCocheC,"%", velocidadCoche);
-
-		//Cargamos en un String porque no sabemos el tamaño que vamos a encesitar
-		orden = "insert into Pasos values(" + numeroPasoC + "," + numeroRadarC + ",'" + matricula + "'," + velocidadCocheC +");";
-		char *ordenDefinitiva;
-		ordenDefinitiva = new char[orden.length() +1];
-
-		//Copiamos el valor
-
-		strcpy(ordenDefinitiva, orden.c_str()); //Necesitamos un char, con el metodo .c_str() lo convertimos a char*
-
-		//Ejecutamos la orden
-
-		int result = sqlite3_exec(db,ordenDefinitiva,NULL,0, &error);
-
-		if (result != SQLITE_OK){
-				cout << "Error al insertar el paso " << error << endl;
-			}else{
-				cout << "Paso insertado correctamente" << endl;
-			}
-			return result;
+	if (result != SQLITE_OK) {
+		cout << "Error al insertar el paso " << error << endl;
+	} else {
+		cout << "Paso insertado correctamente" << endl;
+	}
+	return result;
 
 }
 
 int BaseDeDatos::deletePaso(int numeroPaso) {
+	char *query = new char[140];
+	char *error = new char[140];
+	strcpy(query, "delete from Pasos WHERE numeroPaso = ");
+	char *numeroPasoC = new char[3];
+	sprintf(numeroPasoC, "%i", numeroPaso);
+	strcat(query, numeroPasoC);
+	char *final = new char[1];
+	final = ";";
+	strcat(query, final);
+	//Ejecutamos la orden
+	int result = sqlite3_exec(db, query, NULL, 0, &error);
+
+	if (result != SQLITE_OK) {
+		cout << "Error al borrar" << endl;
+	} else {
+		cout << "Borrado correcto" << endl;
+	}
+	return result;
 
 }
 
 int BaseDeDatos::insertRadar(int numeroRadar, int velocidad, double margen) {
 
-	string orden;
-	char * error;
-
-	//Cargamos en un String porque no sabemos el tamaño que vamos a encesitar
-	orden = "insert into Radares values(" + std::to_string(numeroRadar) + "," + std::to_string(velocidad) + "," +  std::to_string(margen)+ ");";
-
-
-	char *ordenDefinitiva;
-	ordenDefinitiva = new char[orden.length() +1];
-
-	//Copiamos el valor
-
-	strcpy(ordenDefinitiva, orden.c_str()); //Necesitamos un char, con el metodo .c_str() lo convertimos a char*
+	char * error = new char[140];
+	char *query = new char[140];
+	strcpy(query, "insert into Radares values(");
+	char *numeroRadarC = new char[3];
+	sprintf(numeroRadarC, "%i", numeroRadar);
+	strcat(query, numeroRadarC);
+	char *coma = new char[1]; //Para la coma
+	coma = ",";
+	strcat(query, coma);
+	char *velocidadC = new char[3];
+	sprintf(velocidadC, "%i", velocidad);
+	strcat(query, velocidadC);
+	strcat(query, coma);
+	char *margenC = new char[3];
+	sprintf(margenC, "%d", margen);
+	strcat(query, margenC);
+	char *final = new char[2];
+	final = ");";
+	strcat(query, final);
 
 	//Ejecutamos la orden
 
-	int result = sqlite3_exec(db,ordenDefinitiva,NULL,0, &error);
+	int result = sqlite3_exec(db, query, NULL, 0, &error);
 
-	if (result != SQLITE_OK){
-			cout << "Error al insertar " << error << endl;
-		}else{
-			cout << "Radar insertado correctamente" << endl;
-		}
-		return result;
+	if (result != SQLITE_OK) {
+		cout << "Error al insertar " << error << endl;
+	} else {
+		cout << "Radar insertado correctamente" << endl;
+	}
+	return result;
 
 }
 
-
-
 int BaseDeDatos::deleteRadar(int numeroRadar) {
 
-string orden;
-char *numeroRadarC;
-sprintf(numeroRadarC,"%i", numeroRadar);
-orden = "delete from Radares WHERE numeroRadar = " + std::to_string(numeroRadar) +";";
-char *ordenDefinitiva;
-	ordenDefinitiva = new char[orden.length() +1];
-
-	//Copiamos el valor
-
-	strcpy(ordenDefinitiva, orden.c_str()); //Necesitamos un char, con el metodo .c_str() lo convertimos a char*
+	char *query = new char[140];
+	char *error = new char[140];
+	strcpy(query, "delete from Radares WHERE numeroRadar = ");
+	char *numeroRadarC = new char[3];
+	sprintf(numeroRadarC, "%i", numeroRadar);
+	strcat(query, numeroRadarC);
+	char *final = new char[1];
+	final = ";";
+	strcat(query, final);
 
 	//Ejecutamos la orden
+	int result = sqlite3_exec(db, query, NULL, 0, &error);
 
+	if (result != SQLITE_OK) {
+		cout << "Error al borrar" << endl;
+	} else {
+		cout << "Borrado correcto" << endl;
+	}
+	return result;
 
 }
 

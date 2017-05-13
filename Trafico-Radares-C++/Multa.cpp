@@ -8,6 +8,13 @@
 #include "Multa.h"
 
 namespace std {
+Multa::Multa(){
+	this->numeroMulta =0;
+	this->importe =0;
+	this->matricula = new char[1];
+	this->puntos =0;
+
+}
 
 Multa::Multa(int velocidadcoche, int velocidadradar,char *matricula) {
     // TODO Auto-generated constructor stub
