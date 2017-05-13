@@ -16,8 +16,9 @@ Multa::Multa(){
 
 }
 
-Multa::Multa(int velocidadcoche, int velocidadradar,char *matricula) {
+Multa::Multa(int numeroMulta,int velocidadcoche, int velocidadradar,char *matricula) {
     // TODO Auto-generated constructor stub
+	this->numeroMulta =0;
     this->importe =0;
     this->puntos = 0;
     this->matricula = new char [8];

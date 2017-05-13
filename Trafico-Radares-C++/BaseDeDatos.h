@@ -1,13 +1,8 @@
-/*
- * BaseDeDatos.h
- *
- *  Created on: 8 may. 2017
- *      Author: Markel
- */
 #include <string.h>
 #include "sqlite3.h"
 #include <iostream>
 #include "estructuras.h"
+#include "BaseDeDatos.h"
 
 #ifndef BASEDEDATOS_H_
 #define BASEDEDATOS_H_
@@ -40,12 +35,13 @@ public:
 	int insertRadar(int numeroRadar, int velocidad, double margen);
 	int deleteRadar(int numeroRadar);
 
-	int insertMulta(char *matricula,int importe,int puntos);
+	int insertMulta(int numeroMulta,char *matricula,int importe,int puntos);
 	int deleteMulta();
 	static int BDprint(void * nada, int NumDeColumnas, char ** DatoColumna, char ** NombreColumna);
 
 	int selectPaso(int numeroPaso);
-	int selectRadar(int numeroRadar);
+	Paso * selectArrayPasos(int numeroPasos);
+	Radar *selectRadar(int numeroRadar);
 	int selectMulta(int numeroMulta);
 
 

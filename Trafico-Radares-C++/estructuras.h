@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <sys/timeb.h>
+
 #ifndef ESTRUCTURASH
 #define ESTRUCTURASH
 

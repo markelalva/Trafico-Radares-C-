@@ -66,7 +66,6 @@ bd->insertPaso(listaPasos[i].numeroPaso, listaPasos[i].numeroRadar, listaPasos[i
 
 //Mostramos
 menus *m = new menus();
-bd->selectPaso(10);
 int opcion;
 do{
 opcion = m->MenuPrincipal();
@@ -103,6 +102,7 @@ break;
 
 case 2:
 m->MenuGenerarMulta();
+
 break;
 
 case 3:

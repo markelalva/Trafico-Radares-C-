@@ -28,29 +28,37 @@ void funciones::mostrarRadar(Radar &radar){
 }
 
 void funciones::mostrarPaso(Paso &paso){
-	cout <<paso.numeroPaso << endl;
+	cout <<"Informacion del paso: Numero "<< paso.numeroPaso << " el radar : " << paso.numeroRadar<< " y la matricula del coche es " << paso.matricula << endl;
 
 }
 
-Multa funciones::comprobarPaso(Paso &paso){
+void funciones::comprobarPaso(int numeroPasos, int numeroRadares, BaseDeDatos *bd){
+
+Paso *listaPasos = bd->selectArrayPasos(numeroPasos);
+Multa *listaMultas = new Multa[numeroPasos];
+int contadorMultas =0;
+
+for(int i =0; i<numeroPasos; i++){
+Radar e = bd->selectRadar(listaPasos[i].numeroRadar);
+
+if(listaPasos[i].velocidadCoche > e.margen){
+	//Generamos una multa
+	Multa mult = new Multa(contadorMultas,listaPasos[i].velocidadCoche, e.velocidad, listaPasos[i].matricula);
+	listaMultas[contadorMultas] = mult;
+	contadorMultas++;
+}
 
 
-	//Comprobamos que la velocidad del coche sea mayor que el margen del radar
 
-	//Sacamos de la BD la velocidad del radar
-/*
-	int velocidadRadar;
-	int velocidadMargen;
+}
 
-	if(paso.velocidadCoche > velocidadMargen){
-		Multa e = new Multa(paso.velocidadCoche, velocidadRadar, paso.matricula);
-		return e;
-	}
-	else{
-		Multa e = new Multa();
-		return e;
-	}
-	*/
+//Una vez hayamos encontrado todas las multas, las cargamos en la BD
+
+for(int i =0; i<contadorMultas; i++){
+
+bd->insertMulta(listaMultas[i].matricula, listaMultas[i].importe, listaMultas[i].puntos);
+
+}
 
 }
 }
