@@ -42,10 +42,11 @@ public:
 
 	int insertMulta(char *matricula,int importe,int puntos);
 	int deleteMulta();
+	static int BDprint(void * nada, int NumDeColumnas, char ** DatoColumna, char ** NombreColumna);
 
-	void selectPaso();
-	void selectRadar(int numeroRadar);
-	void selectMulta(int numeroMulta);
+	int selectPaso(int numeroPaso);
+	int selectRadar(int numeroRadar);
+	int selectMulta(int numeroMulta);
 
 
 

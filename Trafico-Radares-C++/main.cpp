@@ -54,19 +54,19 @@ bd->crearTablaRadares();
 //Cargamos los radares y los pasos en la BD
 	//Radares
 int i;
-/*for( i=0; i<numeroRadares; i++){
+for( i=0; i<numeroRadares; i++){
 bd->insertRadar(listaRadares[i].numeroRadar, listaRadares[i].velocidad, listaRadares[i].margen);
 }
 	//Pasos
 for(i=0; i<numeroPasos; i++){
 bd->insertPaso(listaPasos[i].numeroPaso, listaPasos[i].numeroRadar, listaPasos[i].matricula, listaPasos[i].velocidadCoche);
 }
-*/
-char *matricula  = new char [8];
-matricula= "99393FBF";
-bd->insertPaso(10, 12, matricula, 140);
+
+
+
 //Mostramos
 menus *m = new menus();
+bd->selectPaso(10);
 int opcion;
 do{
 opcion = m->MenuPrincipal();

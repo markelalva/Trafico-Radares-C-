@@ -174,6 +174,14 @@ int BaseDeDatos::insertPaso(int numeroPaso, int numeroRadar, char* matricula,
 	return result;
 
 }
+int BaseDeDatos::BDprint(void * nada, int NumDeColumnas, char ** DatoColumna,
+		char ** NombreColumna) {
+	for (int i = 0; i < NumDeColumnas; i++) {
+		cout << NombreColumna[i] << " => " << DatoColumna[i] << endl;
+	}
+	cout << endl;
+	return 0;
+}
 
 int BaseDeDatos::deletePaso(int numeroPaso) {
 	char *query = new char[140];
@@ -186,7 +194,7 @@ int BaseDeDatos::deletePaso(int numeroPaso) {
 	final = ";";
 	strcat(query, final);
 	//Ejecutamos la orden
-	int result = sqlite3_exec(db, query, NULL, 0, &error);
+	int result = sqlite3_exec(db, query, BDPrint, 0, &error);
 
 	if (result != SQLITE_OK) {
 		cout << "Error al borrar" << endl;
@@ -245,7 +253,7 @@ int BaseDeDatos::deleteRadar(int numeroRadar) {
 	strcat(query, final);
 
 	//Ejecutamos la orden
-	int result = sqlite3_exec(db, query, NULL, 0, &error);
+	int result = sqlite3_exec(db, query, BDPrint, 0, &error);
 
 	if (result != SQLITE_OK) {
 		cout << "Error al borrar" << endl;
@@ -254,6 +262,35 @@ int BaseDeDatos::deleteRadar(int numeroRadar) {
 	}
 	return result;
 
+}
+
+int BaseDeDatos::selectPaso(int numeroPaso) {
+	cout <<"Hola"<<endl;
+	char *query = new char[140];
+	char *error = new char[140];
+
+	strcpy(query, "SELECT * FROM Pasos where numeroPaso =");
+	char *numeroPasoC = new char[4];
+	sprintf(numeroPasoC, "%i", numeroPaso);
+	strcat(query, numeroPasoC);
+	char *final = new char[1];
+	final = ";";
+	strcat(query, final);
+
+	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL) ;
+		if (result != SQLITE_OK) {
+			printf("Error preparing statement (SELECT)\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+		char name[100];
+		do {
+				result = sqlite3_step(stmt) ;
+				if (result == SQLITE_ROW) {
+					name = sqlite3_column_int(stmt, 0);
+					printf("ID: %d Name:\n",  name);
+				}
+			} while (result == SQLITE_ROW);
 }
 
 }
