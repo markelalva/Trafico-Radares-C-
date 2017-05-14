@@ -174,14 +174,6 @@ int BaseDeDatos::insertPaso(int numeroPaso, int numeroRadar, char* matricula,
 	return result;
 
 }
-int BaseDeDatos::BDprint(void * nada, int NumDeColumnas, char ** DatoColumna,
-		char ** NombreColumna) {
-	for (int i = 0; i < NumDeColumnas; i++) {
-		cout << NombreColumna[i] << " => " << DatoColumna[i] << endl;
-	}
-	cout << endl;
-	return 0;
-}
 
 int BaseDeDatos::deletePaso(int numeroPaso) {
 	char *query = new char[140];
@@ -240,7 +232,8 @@ int BaseDeDatos::insertRadar(int numeroRadar, int velocidad, int margen) {
 
 }
 
-int BaseDeDatos::insertMulta(int numeroMulta, char *matricula, int importe,int puntos){
+int BaseDeDatos::insertMulta(int numeroMulta, char *matricula, int importe,
+		int puntos) {
 	char * error = new char[140];
 	char *query = new char[140];
 	strcpy(query, "insert into Multas values(");
@@ -277,7 +270,6 @@ int BaseDeDatos::insertMulta(int numeroMulta, char *matricula, int importe,int p
 		cout << "Multa insertada correctamente" << endl;
 	}
 	return result;
-
 
 }
 int BaseDeDatos::deleteRadar(int numeroRadar) {
@@ -316,26 +308,26 @@ int BaseDeDatos::selectPaso(int numeroPaso) {
 	final = ";";
 	strcat(query, final);
 
-	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL) ;
-		if (result != SQLITE_OK) {
-			cout << "Error preparing statement (SELECT)" << endl;
-			printf("%s\n", sqlite3_errmsg(db));
-			return result;
-		}
+	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)" << endl;
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
 
-		int valor1;
-		int valor2;
-		int valor3;
-		char *matricula = new char[8];
-		do {
-				result = sqlite3_step(stmt) ;
-				if (result == SQLITE_ROW) {
-					valor1 = sqlite3_column_int(stmt,0);
-					valor2 = sqlite3_column_int(stmt,1);
-					strcpy(matricula, (char*)sqlite3_column_text(stmt,2));
-					cout << matricula << endl;
-				}
-			} while (result == SQLITE_ROW);
+	int valor1;
+	int valor2;
+	int valor3;
+	char *matricula = new char[8];
+	do {
+		result = sqlite3_step(stmt);
+		if (result == SQLITE_ROW) {
+			valor1 = sqlite3_column_int(stmt, 0);
+			valor2 = sqlite3_column_int(stmt, 1);
+			strcpy(matricula, (char*) sqlite3_column_text(stmt, 2));
+			cout << matricula << endl;
+		}
+	} while (result == SQLITE_ROW);
 }
 
 Radar *BaseDeDatos::selectRadar(int numeroRadar) {
@@ -350,59 +342,90 @@ Radar *BaseDeDatos::selectRadar(int numeroRadar) {
 	final = ";";
 	strcat(query, final);
 
-	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL) ;
-		if (result != SQLITE_OK) {
-			cout<<"Error preparing statement (SELECT)" << endl;
+	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)" << endl;
 
+	}
+
+	int velocidad = 0;
+	double velocidadMargen = 0;
+
+	do {
+		result = sqlite3_step(stmt);
+		if (result == SQLITE_ROW) {
+			velocidad = sqlite3_column_int(stmt, 1);
+			velocidadMargen = sqlite3_column_int(stmt, 2);
 		}
-
-		int velocidad =0;
-		double velocidadMargen =0;
-
-		do {
-				result = sqlite3_step(stmt) ;
-				if (result == SQLITE_ROW) {
-					velocidad = sqlite3_column_int(stmt,1);
-					velocidadMargen = sqlite3_column_int(stmt,2);
-				}
-			} while (result == SQLITE_ROW);
-		Radar *e = new Radar();
-		e->velocidad = velocidad;
-		e->numeroRadar = numeroRadar;
-		e->margen = velocidadMargen;
-return e;
+	} while (result == SQLITE_ROW);
+	Radar *e = new Radar();
+	e->velocidad = velocidad;
+	e->numeroRadar = numeroRadar;
+	e->margen = velocidadMargen;
+	return e;
 }
 
-Paso* BaseDeDatos::selectArrayPasos(int numeroPasos){
+Paso* BaseDeDatos::selectArrayPasos(int numeroPasos) {
 	char *query = new char[140];
 	char *error = new char[140];
 
 	strcpy(query, "SELECT * FROM Pasos;");
 
+	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)" << endl;
+	}
 
-	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL) ;
-		if (result != SQLITE_OK) {
-			cout << "Error preparing statement (SELECT)" << endl;
+	Paso *listaPasos = new Paso[numeroPasos];
+	int contador = 0;
+	do {
+		result = sqlite3_step(stmt);
+		if (result == SQLITE_ROW) {
+			Paso e;
+			e.numeroPaso = sqlite3_column_int(stmt, 0);
+			e.numeroRadar = sqlite3_column_int(stmt, 1);
+			strcpy(e.matricula, (char*) sqlite3_column_text(stmt, 2));
+			e.velocidadCoche = sqlite3_column_int(stmt, 3);
+			listaPasos[contador] = e;
+			contador++;
 		}
+	} while (result == SQLITE_ROW);
 
-Paso *listaPasos = new Paso[numeroPasos];
-int contador =0;
-		do {
-				result = sqlite3_step(stmt) ;
-				if (result == SQLITE_ROW) {
-					Paso e;
-					e.numeroPaso = sqlite3_column_int(stmt,0);
-					e.numeroRadar = sqlite3_column_int(stmt,1);
-					strcpy(e.matricula, (char*)sqlite3_column_text(stmt,2));
-					e.velocidadCoche = sqlite3_column_int(stmt,3);
-					listaPasos[contador] = e;
-					contador++;
-				}
-			} while (result == SQLITE_ROW);
-
-		return listaPasos;
+	return listaPasos;
 }
 
+Multa * BaseDeDatos::selectMulta(int numeroMulta) {
+	char *query = new char[140];
+	char *error = new char[140];
+	cout <<"Hasta aqui llega"  << endl;
+
+	strcpy(query, "SELECT * FROM Multas where numeroMulta =");
+	char *numeroMultaC = new char[4];
+	sprintf(numeroMultaC, "%i", numeroMulta);
+	strcat(query, numeroMultaC);
+	char *final = new char[1];
+	final = ";";
+	strcat(query, final);
+
+	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)" << endl;
+		printf("%s\n", sqlite3_errmsg(db));
+	}
+	Multa *e = new Multa();
+	char *matricula = new char[8];
+	do {
+		result = sqlite3_step(stmt);
+		if (result == SQLITE_ROW) {
+			e->setnumeroMulta(sqlite3_column_int(stmt, 0));
+			e->setImporte(sqlite3_column_int(stmt, 2));
+			e->setPuntos(sqlite3_column_int(stmt,3));
+			e->setMatricula(sqlite3_column_text(stmt,1));
+			cout <<"La matricula es " << e->getMatricula()  << endl;
+		}
+	} while (result == SQLITE_ROW);
+return e;
+}
 
 }
 

@@ -19,6 +19,7 @@ Paso *listaPasos;
 funciones *f;
 int numeroRadares;
 int numeroPasos;
+int numeroMultas;
 int main(){
 
 //Cargamos la BD
@@ -65,9 +66,10 @@ for(i=0; i<numeroPasos; i++){
 bd->insertPaso(listaPasos[i].numeroPaso, listaPasos[i].numeroRadar, listaPasos[i].matricula, listaPasos[i].velocidadCoche);
 }
 
+numeroMultas =0;
 
-
-
+int opcion1 =0;
+int opcion2 =0;
 //Mostramos
 menus *m = new menus();
 int opcion;
@@ -76,8 +78,7 @@ opcion = m->MenuPrincipal();
 
 
 switch (opcion){
-int opcion1;
-int opcion2;
+
 case 1:
 opcion1 = m->MenuEstadisticas();
 switch (opcion1){
@@ -105,18 +106,21 @@ case 9:
 break;
 
 case 2:
-m->MenuGenerarMulta(numeroPasos, numeroRadares, bd,f);
-
+numeroMultas = m->MenuGenerarMulta(numeroPasos, numeroRadares, bd,f);
 break;
 
 case 3:
+do{
 opcion2 = m->ConsultarMultas();
-switch(opcion2){
+switch (opcion2){
 case 1:
+	m->verTotalMultas(numeroMultas, f, bd);
 	break;
 case 2:
+	cout << "Opcion 2" << endl;
 	break;
 case 3:
+	cout << "Opcion 3" << endl;
 	break;
 case 4:
 	break;
@@ -124,7 +128,9 @@ case 5:
 	opcion =0;
 	break;
 }
+} while(opcion2!=5);
 break;
+
 
 
 

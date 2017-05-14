@@ -126,6 +126,22 @@ return this->puntos;
 int Multa::getImporte(){
 	return this->importe;
 }
+
+void Multa::setImporte(int importe){
+	this->importe = importe;
+}
+
+void Multa::setPuntos(int puntos){
+	this->puntos = puntos;
+}
+
+void Multa::setnumeroMulta(int numeroMulta){
+	this->numeroMulta = numeroMulta;
+}
+void Multa::setMatricula(char *matricula){
+	this->matricula = new char[8];
+	strcpy(this->matricula, matricula);
+}
 }
 
 /* namespace std */

@@ -19,9 +19,9 @@ public:
 	virtual ~menus();
 	int MenuPrincipal();
 	int MenuEstadisticas();
-	void MenuGenerarMulta(int numeroPasos, int numeroRadares, BaseDeDatos*bd, funciones *fun);
+	int MenuGenerarMulta(int numeroPasos, int numeroRadares, BaseDeDatos*bd, funciones *fun);
 	int ConsultarMultas();
-	int verTotalMultas();
+	int verTotalMultas(int numeroMultas, funciones *f, BaseDeDatos *bd);
 };
 
 } /* namespace std */

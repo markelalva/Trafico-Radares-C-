@@ -8,6 +8,7 @@
 #include "BaseDeDatos.h"
 #include "sqlite3.h"
 #include <stdio.h>
+#include "Multa.h"
 
 
 
@@ -46,7 +47,7 @@ public:
 	int selectPaso(int numeroPaso);
 	Paso * selectArrayPasos(int numeroPasos);
 	Radar *selectRadar(int numeroRadar);
-	int selectMulta(int numeroMulta);
+	Multa * selectMulta(int numeroMulta);
 
 
 

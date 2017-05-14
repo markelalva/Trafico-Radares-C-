@@ -63,10 +63,10 @@ int menus::MenuEstadisticas(){
 
 }
 
-void menus::MenuGenerarMulta(int numeroPasos, int numeroRadares, BaseDeDatos*bd,funciones *fun){
-	int opcion;
+int menus::MenuGenerarMulta(int numeroPasos, int numeroRadares, BaseDeDatos*bd,funciones *fun){
+	int opcion, numeroMultas;
 	cout << "Esta en el menu de Generar Multas" << endl;
-	fun->comprobarPaso(numeroPasos, numeroRadares, bd);
+	numeroMultas = fun->comprobarPaso(numeroPasos, numeroRadares, bd);
 
 
 	cout << "Todas las multas han sido generadas y almacenadas en la BD" << endl;
@@ -77,6 +77,7 @@ void menus::MenuGenerarMulta(int numeroPasos, int numeroRadares, BaseDeDatos*bd,
 	cout << "ERROR! Presione 0 para volver al menu principal" << endl;
 	cin >> opcion;
 	}
+	return numeroMultas;
 
 
 }
@@ -95,14 +96,17 @@ int menus::ConsultarMultas(){
 		cin >> opcion;
 
 	}
-
+	cout <<"Se ha seleccionado" << opcion<< endl;
 	return opcion;
 }
 
-int menus::verTotalMultas(){
+int menus::verTotalMultas(int numeroMultas, funciones *f, BaseDeDatos *bd){
 	int opcion =0;
 	cout << "Se muestran todas las multas que han sido puestas" << endl;
 	//Llamamos a la funcion de mostrar todas las multas, pendiente de crear.
+
+	f->mostrarMultas(numeroMultas, bd);
+
 
 	cout << "Todas las multas han sido mostradas" << endl;
 	cout << "Presione 0 para volver al menu principal" << endl;

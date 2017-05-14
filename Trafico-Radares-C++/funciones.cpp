@@ -32,7 +32,7 @@ void funciones::mostrarPaso(Paso &paso){
 
 }
 
-void funciones::comprobarPaso(int numeroPasos, int numeroRadares, BaseDeDatos *bd){
+int funciones::comprobarPaso(int numeroPasos, int numeroRadares, BaseDeDatos *bd){
 
 Paso *listaPasos = bd->selectArrayPasos(numeroPasos);
 Multa **listaMultas =(Multa**) malloc(sizeof(Multa*) * numeroPasos);
@@ -60,6 +60,15 @@ for(int i =0; i<contadorMultas; i++){
 bd->insertMulta(listaMultas[i]->getnumeroMulta(), listaMultas[i]->getMatricula(), listaMultas[i]->getImporte(), listaMultas[i]->getPuntos());
 
 }
+return contadorMultas++;
+}
 
+void funciones::mostrarMultas(int numeroMultas, BaseDeDatos *bd){
+	cout <<"Que pasa toreteg" << endl;
+	for(int i =0; i<=numeroMultas; i++){
+	Multa *e = bd->selectMulta(i);
+	e->visualizarMulta();
+
+}
 }
 }

@@ -24,8 +24,10 @@ public:
 	funciones();
 	void mostrarRadar(Radar &radar);
 	void mostrarPaso(Paso &paso);
-	void comprobarPaso (int numeroPasos, int numeroRadares, BaseDeDatos *bd);
+	int comprobarPaso (int numeroPasos, int numeroRadares, BaseDeDatos *bd);
+	void mostrarMultas(int numeroMultas, BaseDeDatos *bd);
 	virtual ~funciones();
+
 };
 
 } /* namespace std */

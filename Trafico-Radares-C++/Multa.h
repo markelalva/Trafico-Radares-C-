@@ -30,6 +30,11 @@ int getnumeroMulta();
 int getPuntos();
 int getImporte();
 char * getMatricula();
+void setnumeroMulta(int numeroMulta);
+void setPuntos(int puntos);
+void setImporte(int importe);
+void setMatricula(char *matricula);
+
 
 };
 
