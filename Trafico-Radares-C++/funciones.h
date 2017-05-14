@@ -7,11 +7,15 @@
 
 #ifndef FUNCIONES_H_
 #define FUNCIONES_H_
+
+#include "BaseDeDatos.h"
 #include "Multa.h"
 #include "estructuras.h"
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 
-#include "BaseDeDatos.h"
+
 
 namespace std {
 

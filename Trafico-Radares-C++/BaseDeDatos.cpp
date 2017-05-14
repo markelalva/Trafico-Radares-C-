@@ -76,7 +76,7 @@ int BaseDeDatos::borrarTablaPasos() {
 
 int BaseDeDatos::crearTablaRadares() {
 	char *query =
-			"create table Radares( numeroRadar integer primary key not null, velocidadRadar integer not null, margen double not null)";
+			"create table Radares( numeroRadar integer primary key not null, velocidadRadar integer not null, margen int not null)";
 	char* error = new char[100];
 	int result = sqlite3_exec(db, query, NULL, 0, &error);
 
@@ -205,7 +205,7 @@ int BaseDeDatos::deletePaso(int numeroPaso) {
 
 }
 
-int BaseDeDatos::insertRadar(int numeroRadar, int velocidad, double margen) {
+int BaseDeDatos::insertRadar(int numeroRadar, int velocidad, int margen) {
 
 	char * error = new char[140];
 	char *query = new char[140];
@@ -240,6 +240,46 @@ int BaseDeDatos::insertRadar(int numeroRadar, int velocidad, double margen) {
 
 }
 
+int BaseDeDatos::insertMulta(int numeroMulta, char *matricula, int importe,int puntos){
+	char * error = new char[140];
+	char *query = new char[140];
+	strcpy(query, "insert into Multas values(");
+	char *numeroMultaC = new char[3];
+	sprintf(numeroMultaC, "%i", numeroMulta);
+	strcat(query, numeroMultaC);
+	char *coma = new char[1]; //Para la coma
+	coma = ",";
+	strcat(query, coma);
+	char *apostrofe = new char[1];
+	apostrofe = "'";
+	strcat(query, apostrofe);
+	strcat(query, matricula);
+	strcat(query, apostrofe);
+	strcat(query, coma);
+	char *importeC = new char[3];
+	sprintf(importeC, "%i", importe);
+	strcat(query, importeC);
+	strcat(query, coma);
+	char *puntosC = new char[2];
+	sprintf(puntosC, "%i", puntos);
+	strcat(query, puntosC);
+	char *final = new char[2];
+	final = ");";
+	strcat(query, final);
+
+	//Ejecutamos la orden
+
+	int result = sqlite3_exec(db, query, NULL, 0, &error);
+
+	if (result != SQLITE_OK) {
+		cout << "Error al insertar " << error << endl;
+	} else {
+		cout << "Multa insertada correctamente" << endl;
+	}
+	return result;
+
+
+}
 int BaseDeDatos::deleteRadar(int numeroRadar) {
 
 	char *query = new char[140];
@@ -278,7 +318,7 @@ int BaseDeDatos::selectPaso(int numeroPaso) {
 
 	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL) ;
 		if (result != SQLITE_OK) {
-			printf("Error preparing statement (SELECT)\n");
+			cout << "Error preparing statement (SELECT)" << endl;
 			printf("%s\n", sqlite3_errmsg(db));
 			return result;
 		}
@@ -312,8 +352,8 @@ Radar *BaseDeDatos::selectRadar(int numeroRadar) {
 
 	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL) ;
 		if (result != SQLITE_OK) {
-			printf("Error preparing statement (SELECT)\n");
-			printf("%s\n", sqlite3_errmsg(db));
+			cout<<"Error preparing statement (SELECT)" << endl;
+
 		}
 
 		int velocidad =0;
@@ -323,12 +363,12 @@ Radar *BaseDeDatos::selectRadar(int numeroRadar) {
 				result = sqlite3_step(stmt) ;
 				if (result == SQLITE_ROW) {
 					velocidad = sqlite3_column_int(stmt,1);
-					velocidadMargen = sqlite3_column_double(stmt,2);
+					velocidadMargen = sqlite3_column_int(stmt,2);
 				}
 			} while (result == SQLITE_ROW);
-
 		Radar *e = new Radar();
 		e->velocidad = velocidad;
+		e->numeroRadar = numeroRadar;
 		e->margen = velocidadMargen;
 return e;
 }
@@ -342,8 +382,7 @@ Paso* BaseDeDatos::selectArrayPasos(int numeroPasos){
 
 	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL) ;
 		if (result != SQLITE_OK) {
-			printf("Error preparing statement (SELECT)\n");
-			printf("%s\n", sqlite3_errmsg(db));
+			cout << "Error preparing statement (SELECT)" << endl;
 		}
 
 Paso *listaPasos = new Paso[numeroPasos];

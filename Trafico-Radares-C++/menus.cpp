@@ -99,6 +99,23 @@ int menus::ConsultarMultas(){
 	return opcion;
 }
 
+int menus::verTotalMultas(){
+	int opcion =0;
+	cout << "Se muestran todas las multas que han sido puestas" << endl;
+	//Llamamos a la funcion de mostrar todas las multas, pendiente de crear.
+
+	cout << "Todas las multas han sido mostradas" << endl;
+	cout << "Presione 0 para volver al menu principal" << endl;
+	cin >> opcion;
+
+	while (opcion !=0){
+	cout << "ERROR! Presione 0 para volver al menu principal" << endl;
+	cin >> opcion;
+	}
+
+}
+
+
 
 
 } /* namespace std */

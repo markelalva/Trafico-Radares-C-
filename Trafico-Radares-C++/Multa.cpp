@@ -18,9 +18,7 @@ Multa::Multa(){
 
 Multa::Multa(int numeroMulta,int velocidadcoche, int velocidadradar,char *matricula) {
     // TODO Auto-generated constructor stub
-	this->numeroMulta =0;
-    this->importe =0;
-    this->puntos = 0;
+	this->numeroMulta =numeroMulta;
     this->matricula = new char [8];
     strcpy(this->matricula, matricula);
     switch(velocidadradar){
@@ -110,10 +108,13 @@ Multa::Multa( const Multa &multa){
 }
 
 void Multa::visualizarMulta(){
-	cout << "Se ha puesto una multa a " << this->matricula << " con un importe de :" << this->importe << " y un total de puntos de: " << this->puntos << endl;
+	cout <<  "Multa numero: " << this->numeroMulta << " Se ha puesto una multa a " << this->matricula << " con un importe de :" << this->importe << " y un total de puntos de: " << this->puntos << endl;
 
 }
 
+int Multa::getnumeroMulta(){
+	return this->numeroMulta;
+}
 char* Multa::getMatricula(){
 	return this->matricula;
 }

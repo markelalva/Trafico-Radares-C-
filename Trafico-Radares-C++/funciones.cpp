@@ -40,7 +40,7 @@ int contadorMultas =0;
 
 for(int i =0; i<numeroPasos; i++){
 Radar *e = bd->selectRadar(listaPasos[i].numeroRadar);
-
+//cout << e->numeroRadar << " Tiene una velocidad de: " << e->velocidad << " y un margen " << e->margen << endl;
 if(listaPasos[i].velocidadCoche > e->margen){
 	//Generamos una multa
 	Multa *mult = new Multa(contadorMultas,listaPasos[i].velocidadCoche, e->velocidad, listaPasos[i].matricula);
@@ -55,8 +55,9 @@ if(listaPasos[i].velocidadCoche > e->margen){
 //Una vez hayamos encontrado todas las multas, las cargamos en la BD
 
 for(int i =0; i<contadorMultas; i++){
-cout<< contadorMultas << endl;
-bd->insertMulta(contadorMultas, listaMultas[i]->getMatricula(), listaMultas[i]->getImporte(), listaMultas[i]->getPuntos());
+//cout << listaMultas[i]->getMatricula() << endl;
+//listaMultas[i]->visualizarMulta();
+bd->insertMulta(listaMultas[i]->getnumeroMulta(), listaMultas[i]->getMatricula(), listaMultas[i]->getImporte(), listaMultas[i]->getPuntos());
 
 }
 

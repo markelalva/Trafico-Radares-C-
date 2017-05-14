@@ -41,7 +41,8 @@ listaPasos= new Paso[numeroPasos];
 
 fread(listaPasos, sizeof(Paso), numeroPasos, pasos);
 
-
+cout << listaPasos[0].numeroRadar << endl;
+cout << listaRadares[68].numeroRadar << " Tiene una velocidad de: " << listaRadares[68].velocidad << " y un margen " << listaRadares[68].margen << endl;
 bd->abrirBD(); //Abrimos la BD
 //Borramos las Tablas anteriores
 bd->borrarTablaPasos();
@@ -54,6 +55,7 @@ bd->crearTablaRadares();
 bd->crearTablaMultas();
 //Cargamos los radares y los pasos en la BD
 	//Radares
+
 int i;
 for( i=0; i<numeroRadares; i++){
 bd->insertRadar(listaRadares[i].numeroRadar, listaRadares[i].velocidad, listaRadares[i].margen);
@@ -62,6 +64,7 @@ bd->insertRadar(listaRadares[i].numeroRadar, listaRadares[i].velocidad, listaRad
 for(i=0; i<numeroPasos; i++){
 bd->insertPaso(listaPasos[i].numeroPaso, listaPasos[i].numeroRadar, listaPasos[i].matricula, listaPasos[i].velocidadCoche);
 }
+
 
 
 

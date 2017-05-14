@@ -21,6 +21,7 @@ public:
 	int MenuEstadisticas();
 	void MenuGenerarMulta(int numeroPasos, int numeroRadares, BaseDeDatos*bd, funciones *fun);
 	int ConsultarMultas();
+	int verTotalMultas();
 };
 
 } /* namespace std */

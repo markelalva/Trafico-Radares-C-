@@ -7,6 +7,7 @@
 #include "estructuras.h"
 #include "BaseDeDatos.h"
 #include "sqlite3.h"
+#include <stdio.h>
 
 
 
@@ -35,10 +36,10 @@ public:
 	int insertPaso(int numeroPaso, int numeroRadar, char* matricula, int velocidadCoche);
 	int deletePaso(int numeroPaso);
 
-	int insertRadar(int numeroRadar, int velocidad, double margen);
+	int insertRadar(int numeroRadar, int velocidad, int margen);
 	int deleteRadar(int numeroRadar);
 
-	int insertMulta(int numeroMulta,char *matricula,int importe,int puntos);
+	int insertMulta(int numeroMulta ,char *matricula, int importe,int puntos);
 	int deleteMulta();
 	static int BDprint(void * nada, int NumDeColumnas, char ** DatoColumna, char ** NombreColumna);
 
