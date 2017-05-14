@@ -42,8 +42,7 @@ listaPasos= new Paso[numeroPasos];
 
 fread(listaPasos, sizeof(Paso), numeroPasos, pasos);
 
-cout << listaPasos[0].numeroRadar << endl;
-cout << listaRadares[68].numeroRadar << " Tiene una velocidad de: " << listaRadares[68].velocidad << " y un margen " << listaRadares[68].margen << endl;
+
 bd->abrirBD(); //Abrimos la BD
 //Borramos las Tablas anteriores
 bd->borrarTablaPasos();
@@ -123,8 +122,10 @@ case 3:
 	cout << "Opcion 3" << endl;
 	break;
 case 4:
+	cout << "Opcion 4" << endl;
 	break;
 case 5:
+	cout << "Opcion 5" << endl;
 	opcion =0;
 	break;
 }

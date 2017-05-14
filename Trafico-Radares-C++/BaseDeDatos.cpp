@@ -186,7 +186,7 @@ int BaseDeDatos::deletePaso(int numeroPaso) {
 	final = ";";
 	strcat(query, final);
 	//Ejecutamos la orden
-	int result = sqlite3_exec(db, query, BDprint, 0, &error);
+	int result = sqlite3_exec(db, query, NULL, 0, &error);
 
 	if (result != SQLITE_OK) {
 		cout << "Error al borrar" << endl;
@@ -285,7 +285,7 @@ int BaseDeDatos::deleteRadar(int numeroRadar) {
 	strcat(query, final);
 
 	//Ejecutamos la orden
-	int result = sqlite3_exec(db, query, BDprint, 0, &error);
+	int result = sqlite3_exec(db, query, NULL, 0, &error);
 
 	if (result != SQLITE_OK) {
 		cout << "Error al borrar" << endl;

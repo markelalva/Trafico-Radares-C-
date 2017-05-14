@@ -42,7 +42,6 @@ public:
 
 	int insertMulta(int numeroMulta ,char *matricula, int importe,int puntos);
 	int deleteMulta();
-	static int BDprint(void * nada, int NumDeColumnas, char ** DatoColumna, char ** NombreColumna);
 
 	int selectPaso(int numeroPaso);
 	Paso * selectArrayPasos(int numeroPasos);
