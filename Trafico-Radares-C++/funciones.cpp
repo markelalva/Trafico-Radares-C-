@@ -35,15 +35,15 @@ void funciones::mostrarPaso(Paso &paso){
 void funciones::comprobarPaso(int numeroPasos, int numeroRadares, BaseDeDatos *bd){
 
 Paso *listaPasos = bd->selectArrayPasos(numeroPasos);
-Multa *listaMultas = new Multa[numeroPasos];
+Multa **listaMultas =(Multa**) malloc(sizeof(Multa*) * numeroPasos);
 int contadorMultas =0;
 
 for(int i =0; i<numeroPasos; i++){
-Radar e = bd->selectRadar(listaPasos[i].numeroRadar);
+Radar *e = bd->selectRadar(listaPasos[i].numeroRadar);
 
-if(listaPasos[i].velocidadCoche > e.margen){
+if(listaPasos[i].velocidadCoche > e->margen){
 	//Generamos una multa
-	Multa mult = new Multa(contadorMultas,listaPasos[i].velocidadCoche, e.velocidad, listaPasos[i].matricula);
+	Multa *mult = new Multa(contadorMultas,listaPasos[i].velocidadCoche, e->velocidad, listaPasos[i].matricula);
 	listaMultas[contadorMultas] = mult;
 	contadorMultas++;
 }
@@ -55,8 +55,8 @@ if(listaPasos[i].velocidadCoche > e.margen){
 //Una vez hayamos encontrado todas las multas, las cargamos en la BD
 
 for(int i =0; i<contadorMultas; i++){
-
-bd->insertMulta(listaMultas[i].matricula, listaMultas[i].importe, listaMultas[i].puntos);
+cout<< contadorMultas << endl;
+bd->insertMulta(contadorMultas, listaMultas[i]->getMatricula(), listaMultas[i]->getImporte(), listaMultas[i]->getPuntos());
 
 }
 

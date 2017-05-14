@@ -101,6 +101,7 @@ Multa::~Multa() {
 }
 
 Multa::Multa( const Multa &multa){
+	this->numeroMulta = multa.numeroMulta;
 	this->importe = multa.importe;
 	this->puntos = multa.puntos;
 	this->matricula = new char [strlen(multa.matricula) +1];
@@ -113,4 +114,17 @@ void Multa::visualizarMulta(){
 
 }
 
-} /* namespace std */
+char* Multa::getMatricula(){
+	return this->matricula;
+}
+
+int Multa::getPuntos(){
+return this->puntos;
+
+}
+int Multa::getImporte(){
+	return this->importe;
+}
+}
+
+/* namespace std */

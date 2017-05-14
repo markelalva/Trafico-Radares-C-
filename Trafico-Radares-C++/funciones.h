@@ -7,9 +7,10 @@
 
 #ifndef FUNCIONES_H_
 #define FUNCIONES_H_
+#include "Multa.h"
 #include "estructuras.h"
 #include <iostream>
-#include "Multa.h"
+
 #include "BaseDeDatos.h"
 
 namespace std {

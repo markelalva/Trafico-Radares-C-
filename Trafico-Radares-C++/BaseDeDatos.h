@@ -1,11 +1,14 @@
+#ifndef BASEDEDATOS_H_
+#define BASEDEDATOS_H_
+
+
 #include <string.h>
-#include "sqlite3.h"
 #include <iostream>
 #include "estructuras.h"
 #include "BaseDeDatos.h"
+#include "sqlite3.h"
 
-#ifndef BASEDEDATOS_H_
-#define BASEDEDATOS_H_
+
 
 namespace std {
 

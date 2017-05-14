@@ -7,6 +7,9 @@
 
 #ifndef MENUS_H_
 #define MENUS_H_
+#include "BaseDeDatos.h"
+#include "funciones.h"
+
 
 namespace std {
 
@@ -16,7 +19,7 @@ public:
 	virtual ~menus();
 	int MenuPrincipal();
 	int MenuEstadisticas();
-	void MenuGenerarMulta();
+	void MenuGenerarMulta(int numeroPasos, int numeroRadares, BaseDeDatos*bd, funciones *fun);
 	int ConsultarMultas();
 };
 

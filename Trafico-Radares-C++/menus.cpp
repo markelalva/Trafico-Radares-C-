@@ -63,11 +63,10 @@ int menus::MenuEstadisticas(){
 
 }
 
-void menus::MenuGenerarMulta(){
+void menus::MenuGenerarMulta(int numeroPasos, int numeroRadares, BaseDeDatos*bd,funciones *fun){
 	int opcion;
 	cout << "Esta en el menu de Generar Multas" << endl;
-	//AQUI VA LA FUNCIONALIDAD (PENDIENTE)
-
+	fun->comprobarPaso(numeroPasos, numeroRadares, bd);
 
 
 	cout << "Todas las multas han sido generadas y almacenadas en la BD" << endl;

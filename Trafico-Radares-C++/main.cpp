@@ -46,11 +46,12 @@ bd->abrirBD(); //Abrimos la BD
 //Borramos las Tablas anteriores
 bd->borrarTablaPasos();
 bd->borrarTablaRadares();
+bd->borrarTablaMultas();
 
 //Creamos las tablas
 bd->crearTablaPasos();
 bd->crearTablaRadares();
-
+bd->crearTablaMultas();
 //Cargamos los radares y los pasos en la BD
 	//Radares
 int i;
@@ -101,7 +102,7 @@ case 9:
 break;
 
 case 2:
-m->MenuGenerarMulta();
+m->MenuGenerarMulta(numeroPasos, numeroRadares, bd,f);
 
 break;
 
