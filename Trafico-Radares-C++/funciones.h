@@ -22,6 +22,9 @@ namespace std {
 class funciones {
 public:
 	funciones();
+	int cargarRadares(BaseDeDatos *bd, FILE *radares);
+	int cargarUsuarios(BaseDeDatos *bd, FILE *usuarios);
+	int cargarPasos(BaseDeDatos *bd, FILE *pasos);
 	void mostrarRadar(Radar &radar);
 	void mostrarPaso(Paso &paso);
 	int comprobarPaso (int numeroPasos, int numeroRadares, BaseDeDatos *bd);

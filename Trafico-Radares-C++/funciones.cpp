@@ -18,6 +18,56 @@ funciones::~funciones() {
 	// TODO Auto-generated destructor stub
 }
 
+int funciones::cargarRadares(BaseDeDatos *bd, FILE *radares){
+	int numeroRadares =0;
+	Radar *listaRadares;
+	radares = fopen("radares.dat", "rb");
+	numeroRadares = fgetc(radares);
+	listaRadares= new Radar[numeroRadares];
+
+	fread(listaRadares, sizeof(Radar), numeroRadares, radares);
+	int i;
+	for( i=0; i<numeroRadares; i++){
+	bd->insertRadar(listaRadares[i].numeroRadar, listaRadares[i].velocidad, listaRadares[i].margen);
+	}
+
+return numeroRadares;
+}
+
+int funciones::cargarPasos(BaseDeDatos *bd, FILE *pasos){
+	int numeroPasos =0;
+	Paso *listaPasos;
+	pasos = fopen("pasos.dat", "rb");
+	numeroPasos = fgetc(pasos);
+	listaPasos= new Paso[numeroPasos];
+
+	fread(listaPasos, sizeof(Paso), numeroPasos, pasos);
+	int i;
+	for(i=0; i<numeroPasos; i++){
+	bd->insertPaso(listaPasos[i].numeroPaso, listaPasos[i].numeroRadar, listaPasos[i].matricula, listaPasos[i].velocidadCoche);
+	}
+
+
+return numeroPasos;
+}
+
+int funciones::cargarUsuarios(BaseDeDatos *bd, FILE *usuarios){
+	int numeroUsuarios;
+	Usuario *listaUsuarios;
+	usuarios = fopen("usuarios.dat", "rb");
+	numeroUsuarios = fgetc(usuarios);
+	listaUsuarios = new Usuario[numeroUsuarios];
+
+	fread(listaUsuarios, sizeof(Usuario), numeroUsuarios, usuarios);
+	int i;
+	for(i=0; i<numeroUsuarios; i++){
+		//Metodo insertar usuario (Pendiente)
+	}
+
+	return numeroUsuarios;
+
+}
+
 
 
 

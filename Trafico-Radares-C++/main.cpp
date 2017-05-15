@@ -15,7 +15,7 @@ using namespace std;
 FILE *radares;
 FILE *pasos;
 FILE *usuarios;
-Radar *listaRadares;
+
 Paso *listaPasos;
 Usuario *listaUsuarios;
 funciones *f;
@@ -30,30 +30,6 @@ BaseDeDatos *bd = new BaseDeDatos("Base de Datos");
 
 //Cargamos los radares en un array desde el fichero
 f = new funciones();
-
-
-radares = fopen("radares.dat", "rb");
-numeroRadares = fgetc(radares);
-listaRadares= new Radar[numeroRadares];
-
-fread(listaRadares, sizeof(Radar), numeroRadares, radares);
-
-//Cargamos los pasos
-
-pasos = fopen("pasos.dat", "rb");
-numeroPasos = fgetc(pasos);
-listaPasos= new Paso[numeroPasos];
-
-fread(listaPasos, sizeof(Paso), numeroPasos, pasos);
-
-//Cargamos los usuarios
-
-usuarios = fopen("usuarios.dat", "rb");
-numeroUsuarios = fgetc(usuarios);
-listaUsuarios = new Usuario[numeroUsuarios];
-
-fread(listaUsuarios, sizeof(Usuario), numeroUsuarios, usuarios);
-
 
 bd->abrirBD(); //Abrimos la BD
 //Borramos las Tablas anteriores
@@ -71,20 +47,11 @@ bd->crearTablaUsuarios();
 //Cargamos los radares y los pasos en la BD
 	//Radares
 
-int i;
-for( i=0; i<numeroRadares; i++){
-bd->insertRadar(listaRadares[i].numeroRadar, listaRadares[i].velocidad, listaRadares[i].margen);
-}
+numeroRadares = f->cargarRadares(bd, radares);
 	//Pasos
-for(i=0; i<numeroPasos; i++){
-bd->insertPaso(listaPasos[i].numeroPaso, listaPasos[i].numeroRadar, listaPasos[i].matricula, listaPasos[i].velocidadCoche);
-}
-
+numeroPasos = f->cargarPasos(bd,pasos);
 //Usuarios
-for(i =0; i<numeroUsuarios; i++){
-
-
-}
+numeroUsuarios = f->cargarUsuarios(bd, usuarios);
 
 numeroMultas =0;
 
