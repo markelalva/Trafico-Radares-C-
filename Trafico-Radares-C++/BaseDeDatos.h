@@ -29,13 +29,18 @@ public:
 	int crearTablaPasos();
 	int crearTablaRadares();
 	int crearTablaMultas();
+	int crearTablaUsuarios();
 
 	int borrarTablaPasos();
 	int borrarTablaRadares();
 	int borrarTablaMultas();
+	int borrarTablaUsuarios();
 
 	int insertPaso(int numeroPaso, int numeroRadar, char* matricula, int velocidadCoche);
 	int deletePaso(int numeroPaso);
+
+	int insertUsuario(char *dni, char *nombre, char *apellidos, char*direccion, char*matricula, int telefono);
+	int deleteUsuario();
 
 	int insertRadar(int numeroRadar, int velocidad, int margen);
 	int deleteRadar(int numeroRadar);
@@ -47,6 +52,7 @@ public:
 	Paso * selectArrayPasos(int numeroPasos);
 	Radar *selectRadar(int numeroRadar);
 	Multa * selectMulta(int numeroMulta);
+	Usuario *selectUsuario();
 
 
 

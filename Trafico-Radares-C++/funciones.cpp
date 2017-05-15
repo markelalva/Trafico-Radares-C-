@@ -64,7 +64,6 @@ return contadorMultas++;
 }
 
 void funciones::mostrarMultas(int numeroMultas, BaseDeDatos *bd){
-	cout <<"Que pasa toreteg" << endl;
 	for(int i =0; i<=numeroMultas; i++){
 	Multa *e = bd->selectMulta(i);
 	e->visualizarMulta();

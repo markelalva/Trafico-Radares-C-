@@ -91,7 +91,6 @@ int menus::ConsultarMultas(){
 	cout << "4- Consultar el total de puntos detraidos mediante multas" << endl;
 	cout << "5- Salir" << endl;
 	cin >> opcion;
-	cout <<"Se ha seleccionado" << opcion<< endl;
 	while (opcion <1 || opcion >5){
 		cout << "Introduce un valor valido" << endl;
 		cin >> opcion;

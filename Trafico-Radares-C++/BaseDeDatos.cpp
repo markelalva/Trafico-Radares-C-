@@ -134,6 +134,36 @@ int BaseDeDatos::borrarTablaMultas() {
 	return result;
 }
 
+int BaseDeDatos::crearTablaUsuarios() {
+	char *query =
+			"create table Usuarios( dni text primary key not null, nombre text not null, apellidos text not null, direccion text not null, matricula text not null, telefono integer not null)";
+	char* error = new char[100];
+	int result = sqlite3_exec(db, query, NULL, 0, &error);
+
+	if (result != SQLITE_OK) {
+		cout << "Error al crear la tabla Usuarios " << error << endl;
+	} else {
+		cout << "Tabla Usuarios creada" << endl;
+	}
+	return result;
+
+}
+
+int BaseDeDatos::borrarTablaUsuarios() {
+	char * query;
+	char * error;
+	query = "drop table Usuarios";
+
+	int result = sqlite3_exec(db, query, NULL, 0, &error);
+
+	if (result != SQLITE_OK) {
+		cout << "Error al borrar la tabla Usuarios" << endl;
+	} else {
+		cout << "Tabla Usuarios borrada" << endl;
+	}
+	return result;
+
+}
 int BaseDeDatos::insertPaso(int numeroPaso, int numeroRadar, char* matricula,
 		int velocidadCoche) {
 	char *error = new char[140];
@@ -296,6 +326,9 @@ int BaseDeDatos::deleteRadar(int numeroRadar) {
 
 }
 
+int BaseDeDatos::insertUsuario(char *dni, char *nombre, char *apellidos, char*direccion, char*matricula, int telefono){
+char *query = new char[200];
+}
 int BaseDeDatos::selectPaso(int numeroPaso) {
 	char *query = new char[140];
 	char *error = new char[140];
@@ -396,8 +429,7 @@ Paso* BaseDeDatos::selectArrayPasos(int numeroPasos) {
 
 Multa * BaseDeDatos::selectMulta(int numeroMulta) {
 	char *query = new char[140];
-	char *error = new char[140];
-	cout <<"Hasta aqui llega"  << endl;
+	//char *error = new char[140];
 
 	strcpy(query, "SELECT * FROM Multas where numeroMulta =");
 	char *numeroMultaC = new char[4];
@@ -419,12 +451,11 @@ Multa * BaseDeDatos::selectMulta(int numeroMulta) {
 		if (result == SQLITE_ROW) {
 			e->setnumeroMulta(sqlite3_column_int(stmt, 0));
 			e->setImporte(sqlite3_column_int(stmt, 2));
-			e->setPuntos(sqlite3_column_int(stmt,3));
-			e->setMatricula(sqlite3_column_text(stmt,1));
-			cout <<"La matricula es " << e->getMatricula()  << endl;
+			e->setPuntos(sqlite3_column_int(stmt, 3));
+			e->setMatricula((char*) sqlite3_column_text(stmt, 1));
 		}
 	} while (result == SQLITE_ROW);
-return e;
+	return e;
 }
 
 }
