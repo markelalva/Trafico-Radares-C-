@@ -30,6 +30,7 @@ BaseDeDatos *bd = new BaseDeDatos("Base de Datos");
 
 //Cargamos los radares en un array desde el fichero
 f = new funciones();
+cout <<"Hola" << endl;
 
 bd->abrirBD(); //Abrimos la BD
 //Borramos las Tablas anteriores

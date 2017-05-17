@@ -326,8 +326,9 @@ int BaseDeDatos::deleteRadar(int numeroRadar) {
 
 }
 
-int BaseDeDatos::insertUsuario(char *dni, char *nombre, char *apellidos, char*direccion, char*matricula, int telefono){
-char *query = new char[200];
+int BaseDeDatos::insertUsuario(char *dni, char *nombre, char *apellidos,
+	char*direccion, char*matricula, int telefono) {
+	char *query = new char[200];
 }
 int BaseDeDatos::selectPaso(int numeroPaso) {
 	char *query = new char[140];
@@ -345,12 +346,9 @@ int BaseDeDatos::selectPaso(int numeroPaso) {
 	if (result != SQLITE_OK) {
 		cout << "Error preparing statement (SELECT)" << endl;
 		printf("%s\n", sqlite3_errmsg(db));
-		return result;
 	}
-
 	int valor1;
 	int valor2;
-	int valor3;
 	char *matricula = new char[8];
 	do {
 		result = sqlite3_step(stmt);
@@ -458,8 +456,42 @@ Multa * BaseDeDatos::selectMulta(int numeroMulta) {
 	return e;
 }
 
+int BaseDeDatos::selectImporteTotal() {
+	char *query = new char[140];
+	strcpy(query, "SELECT SUM(IMPORTE) FROM MULTAS;");
+	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)" << endl;
+	}
+
+	int importeTotal = 0;
+	do {
+		result = sqlite3_step(stmt);
+		if (result == SQLITE_ROW) {
+			importeTotal = sqlite3_column_int(stmt, 0);
+		}
+	} while (result == SQLITE_ROW);
+
+	return importeTotal;
+
 }
+int BaseDeDatos::selectPuntosTotal(){
+char*query = new char[140];
+strcpy(query,"SELECT SUM(PUNTOS) FROM MULTAS");
 
-int
-
+int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+    if (result != SQLITE_OK) {
+        cout << "Error preparing statement (SELECT)" << endl;
+    }
+    int SumaTotal = 0;
+    do {
+        result = sqlite3_step(stmt);
+        if (result == SQLITE_ROW) {
+            SumaTotal = sqlite3_column_int(stmt, 0);
+        }
+    } while (result == SQLITE_ROW);
+    return SumaTotal;
+}
+}
 /* namespace std */
