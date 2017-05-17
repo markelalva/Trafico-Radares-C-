@@ -54,6 +54,9 @@ public:
 	Multa * selectMulta(int numeroMulta);
 	Usuario *selectUsuario();
 
+	int selectImporteTotal();
+	int selectPuntosTotal();
+
 
 
 	BaseDeDatos(const char * nombre);

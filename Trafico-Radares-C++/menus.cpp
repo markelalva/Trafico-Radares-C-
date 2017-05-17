@@ -119,6 +119,11 @@ int menus::verTotalMultas(int numeroMultas, funciones *f, BaseDeDatos *bd){
 
 }
 
+int verTotalDinero(BaseDeDatos *bd){
+
+
+}
+
 
 
 

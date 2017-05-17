@@ -460,4 +460,6 @@ Multa * BaseDeDatos::selectMulta(int numeroMulta) {
 
 }
 
+int
+
 /* namespace std */
