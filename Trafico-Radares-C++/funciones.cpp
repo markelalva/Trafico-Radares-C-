@@ -107,7 +107,7 @@ if(listaPasos[i].velocidadCoche > e->margen){
 for(int i =0; i<contadorMultas; i++){
 //cout << listaMultas[i]->getMatricula() << endl;
 //listaMultas[i]->visualizarMulta();
-bd->insertMulta(listaMultas[i]->getnumeroMulta(), listaMultas[i]->getMatricula(), listaMultas[i]->getImporte(), listaMultas[i]->getPuntos());
+bd->insertMulta(listaMultas[i]->getnumeroMulta(), listaMultas[i]->getMatricula(), listaMultas[i]->getVelocidadCoche(), listaMultas[i]->getvelocidadRadar(), listaMultas[i]->getImporte(), listaMultas[i]->getPuntos());
 
 }
 return contadorMultas++;

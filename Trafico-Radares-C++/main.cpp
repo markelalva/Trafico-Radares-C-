@@ -30,7 +30,6 @@ BaseDeDatos *bd = new BaseDeDatos("Base de Datos");
 
 //Cargamos los radares en un array desde el fichero
 f = new funciones();
-cout <<"Hola" << endl;
 
 bd->abrirBD(); //Abrimos la BD
 //Borramos las Tablas anteriores
@@ -105,16 +104,15 @@ case 1:
 	m->verTotalMultas(numeroMultas, f, bd);
 	break;
 case 2:
-	cout << "Opcion 2" << endl;
+	m->verMultasUsuario(bd, numeroMultas);
 	break;
 case 3:
-	cout << "Opcion 3" << endl;
+	m->verTotalDinero(bd, numeroMultas);
 	break;
 case 4:
-	cout << "Opcion 4" << endl;
+	m->verTotalPuntos(bd, numeroMultas);
 	break;
 case 5:
-	cout << "Opcion 5" << endl;
 	opcion =0;
 	break;
 }

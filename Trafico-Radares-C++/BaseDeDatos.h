@@ -45,13 +45,14 @@ public:
 	int insertRadar(int numeroRadar, int velocidad, int margen);
 	int deleteRadar(int numeroRadar);
 
-	int insertMulta(int numeroMulta ,char *matricula, int importe,int puntos);
+	int insertMulta(int numeroMulta, char *matricula, int velocidadCoche, int velocidadRadar, int importe, int puntos);
 	int deleteMulta();
 
 	int selectPaso(int numeroPaso);
 	Paso * selectArrayPasos(int numeroPasos);
 	Radar *selectRadar(int numeroRadar);
 	Multa * selectMulta(int numeroMulta);
+	void verMultas(char *matricula);
 	Usuario *selectUsuario();
 
 	int selectImporteTotal();
