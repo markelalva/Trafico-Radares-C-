@@ -28,9 +28,10 @@ int menus::MenuPrincipal() {
 	cout << "1- Consultar estad�sticas" << endl;
 	cout << "2- Generar multas" << endl;
 	cout << "3- Consultar multas" << endl;
-	cout << "4- Salir" << endl;
+	cout << "4- Imprimir multas" << endl;
+	cout << "5- Salir" << endl;
 	cin >> opcion;
-	while (opcion < 1 || opcion > 4) {
+	while (opcion < 1 || opcion > 5) {
 		cout << "Introduce un valor valido" << endl;
 		cin >> opcion;
 
@@ -192,6 +193,34 @@ void menus::verMultasUsuario(BaseDeDatos *bd, int numeroMultas) {
 		cout << "ERROR! Presione 0 para volver al menu principal" << endl;
 		cin >> opcion;
 	}
+
+}
+void menus::verPromedioMultas(BaseDeDatos *bd, int numeroRadares){
+int numeroRadar =0;
+int opcion;
+cout <<"Introduce el numero de radar para obtener su promedio " << endl;
+cin >> numeroRadar;
+
+while(numeroRadar < 0 || numeroRadar >numeroRadares -1){
+	cout << "No ha introducido un valor valido" << endl;
+	cin >>numeroRadar;
+}
+
+int numeroMultas = bd->numeroMultas(numeroRadar);
+int numeroPasos = bd->numeroPasos(numeroRadar);
+
+double promedio = numeroPasos / numeroMultas;
+
+cout << "El radar " << numeroRadar << " pone, de media, 1 multa cada " << promedio << " pasos." << endl;
+
+cout << "Presione 0 para volver al menu principal" << endl;
+cin >> opcion;
+
+while (opcion != 0) {
+	cout << "ERROR! Presione 0 para volver al menu principal" << endl;
+	cin >> opcion;
+}
+
 
 }
 

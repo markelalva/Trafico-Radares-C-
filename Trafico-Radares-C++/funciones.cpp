@@ -18,40 +18,41 @@ funciones::~funciones() {
 	// TODO Auto-generated destructor stub
 }
 
-int funciones::cargarRadares(BaseDeDatos *bd, FILE *radares){
-	int numeroRadares =0;
+int funciones::cargarRadares(BaseDeDatos *bd, FILE *radares) {
+	int numeroRadares = 0;
 	Radar *listaRadares;
 	radares = fopen("radares.dat", "rb");
 	numeroRadares = fgetc(radares);
-	listaRadares= new Radar[numeroRadares];
+	listaRadares = new Radar[numeroRadares];
 
 	fread(listaRadares, sizeof(Radar), numeroRadares, radares);
 	int i;
-	for( i=0; i<numeroRadares; i++){
-	bd->insertRadar(listaRadares[i].numeroRadar, listaRadares[i].velocidad, listaRadares[i].margen);
+	for (i = 0; i < numeroRadares; i++) {
+		bd->insertRadar(listaRadares[i].numeroRadar, listaRadares[i].velocidad,
+				listaRadares[i].margen);
 	}
 
-return numeroRadares;
+	return numeroRadares;
 }
 
-int funciones::cargarPasos(BaseDeDatos *bd, FILE *pasos){
-	int numeroPasos =0;
+int funciones::cargarPasos(BaseDeDatos *bd, FILE *pasos) {
+	int numeroPasos = 0;
 	Paso *listaPasos;
 	pasos = fopen("pasos.dat", "rb");
 	numeroPasos = fgetc(pasos);
-	listaPasos= new Paso[numeroPasos];
+	listaPasos = new Paso[numeroPasos];
 
 	fread(listaPasos, sizeof(Paso), numeroPasos, pasos);
 	int i;
-	for(i=0; i<numeroPasos; i++){
-	bd->insertPaso(listaPasos[i].numeroPaso, listaPasos[i].numeroRadar, listaPasos[i].matricula, listaPasos[i].velocidadCoche);
+	for (i = 0; i < numeroPasos; i++) {
+		bd->insertPaso(listaPasos[i].numeroPaso, listaPasos[i].numeroRadar,
+				listaPasos[i].matricula, listaPasos[i].velocidadCoche);
 	}
 
-
-return numeroPasos;
+	return numeroPasos;
 }
 
-int funciones::cargarUsuarios(BaseDeDatos *bd, FILE *usuarios){
+int funciones::cargarUsuarios(BaseDeDatos *bd, FILE *usuarios) {
 	int numeroUsuarios;
 	Usuario *listaUsuarios;
 	usuarios = fopen("usuarios.dat", "rb");
@@ -60,7 +61,7 @@ int funciones::cargarUsuarios(BaseDeDatos *bd, FILE *usuarios){
 
 	fread(listaUsuarios, sizeof(Usuario), numeroUsuarios, usuarios);
 	int i;
-	for(i=0; i<numeroUsuarios; i++){
+	for (i = 0; i < numeroUsuarios; i++) {
 		//Metodo insertar usuario (Pendiente)
 	}
 
@@ -68,56 +69,59 @@ int funciones::cargarUsuarios(BaseDeDatos *bd, FILE *usuarios){
 
 }
 
-
-
-
-
-void funciones::mostrarRadar(Radar &radar){
+void funciones::mostrarRadar(Radar &radar) {
 	cout << radar.numeroRadar << endl;
 
 }
 
-void funciones::mostrarPaso(Paso &paso){
-	cout <<"Informacion del paso: Numero "<< paso.numeroPaso << " el radar : " << paso.numeroRadar<< " y la matricula del coche es " << paso.matricula << endl;
+void funciones::mostrarPaso(Paso &paso) {
+	cout << "Informacion del paso: Numero " << paso.numeroPaso << " el radar : "
+			<< paso.numeroRadar << " y la matricula del coche es "
+			<< paso.matricula << endl;
 
 }
 
-int funciones::comprobarPaso(int numeroPasos, int numeroRadares, BaseDeDatos *bd){
+int funciones::comprobarPaso(int numeroPasos, int numeroRadares,
+		BaseDeDatos *bd) {
 
-Paso *listaPasos = bd->selectArrayPasos(numeroPasos);
-Multa **listaMultas =(Multa**) malloc(sizeof(Multa*) * numeroPasos);
-int contadorMultas =0;
+	Paso *listaPasos = bd->selectArrayPasos(numeroPasos);
+	Multa **listaMultas = (Multa**) malloc(sizeof(Multa*) * numeroPasos);
+	int contadorMultas = 0;
 
-for(int i =0; i<numeroPasos; i++){
-Radar *e = bd->selectRadar(listaPasos[i].numeroRadar);
+	for (int i = 0; i < numeroPasos; i++) {
+		Radar *e = bd->selectRadar(listaPasos[i].numeroRadar);
 //cout << e->numeroRadar << " Tiene una velocidad de: " << e->velocidad << " y un margen " << e->margen << endl;
-if(listaPasos[i].velocidadCoche > e->margen){
-	//Generamos una multa
-	Multa *mult = new Multa(contadorMultas,listaPasos[i].velocidadCoche, e->velocidad, listaPasos[i].matricula);
-	listaMultas[contadorMultas] = mult;
-	contadorMultas++;
-}
+		if (listaPasos[i].velocidadCoche > e->margen) {
+			//Generamos una multa
+			Multa *mult = new Multa(contadorMultas,
+					listaPasos[i].velocidadCoche, e->velocidad,
+					listaPasos[i].matricula, listaPasos[i].numeroRadar);
 
+			listaMultas[contadorMultas] = mult;
+			contadorMultas++;
+		}
 
-
-}
+	}
 
 //Una vez hayamos encontrado todas las multas, las cargamos en la BD
 
-for(int i =0; i<contadorMultas; i++){
-//cout << listaMultas[i]->getMatricula() << endl;
-//listaMultas[i]->visualizarMulta();
-bd->insertMulta(listaMultas[i]->getnumeroMulta(), listaMultas[i]->getMatricula(), listaMultas[i]->getVelocidadCoche(), listaMultas[i]->getvelocidadRadar(), listaMultas[i]->getImporte(), listaMultas[i]->getPuntos());
+	for (int i = 0; i < contadorMultas; i++) {
+		bd->insertMulta(listaMultas[i]->getnumeroMulta(),
+				listaMultas[i]->getMatricula(),
+				listaMultas[i]->getVelocidadCoche(),
+				listaMultas[i]->getvelocidadRadar(),
+				listaMultas[i]->getImporte(), listaMultas[i]->getPuntos(),
+				listaMultas[i]->getnumeroRadar());
 
-}
-return contadorMultas++;
+	}
+	return contadorMultas++;
 }
 
-void funciones::mostrarMultas(int numeroMultas, BaseDeDatos *bd){
-	for(int i =0; i<=numeroMultas; i++){
-	Multa *e = bd->selectMulta(i);
-	e->visualizarMulta();
+void funciones::mostrarMultas(int numeroMultas, BaseDeDatos *bd) {
+	for (int i = 0; i <= numeroMultas; i++) {
+		Multa *e = bd->selectMulta(i);
+		e->visualizarMulta();
 
-}
+	}
 }
 }

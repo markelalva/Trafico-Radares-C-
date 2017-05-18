@@ -71,6 +71,8 @@ opcion1 = m->MenuEstadisticas();
 switch (opcion1){
 
 case 1:
+	cout <<"Opcion 1" << endl;
+	bd->MaximoRadar();
 	break;
 case 2:
 	break;
@@ -83,8 +85,10 @@ case 5:
 case 6:
 	break;
 case 7:
+	bd->verMayoresMultas();
 	break;
 case 8:
+	m->verPromedioMultas(bd, numeroRadares);
 	break;
 case 9:
 	opcion = 0; //Para volver al menu principal
@@ -123,7 +127,7 @@ break;
 
 
 }
-} while (opcion !=4);
+} while (opcion !=5);
 
 cout <<"Gracias por usar el programa, esperemos le haya sido util" << endl;
 

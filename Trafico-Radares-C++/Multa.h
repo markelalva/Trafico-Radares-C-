@@ -20,11 +20,12 @@ private:
 	char *matricula;
 	int importe;
 	int puntos;
+	int numeroRadar;
 
 public:
 
 Multa();
-Multa(int numeroMulta,int velocidadCoche, int velocidadRadar,char *matricula);
+Multa(int numeroMulta,int velocidadCoche, int velocidadRadar,char *matricula, int numeroRadar);
 Multa(const Multa &multa);
 virtual ~Multa();
 void visualizarMulta();
@@ -33,6 +34,7 @@ int getPuntos();
 int getImporte();
 int getVelocidadCoche();
 int getvelocidadRadar();
+int getnumeroRadar();
 char * getMatricula();
 void setnumeroMulta(int numeroMulta);
 void setPuntos(int puntos);
@@ -40,7 +42,7 @@ void setImporte(int importe);
 void setMatricula(char *matricula);
 void setVelocidadCoche(int velocidadCoche);
 void setVelocidadRadar(int velocidadRadar);
-
+void setnumeroRadar(int numeroRadar);
 
 };
 

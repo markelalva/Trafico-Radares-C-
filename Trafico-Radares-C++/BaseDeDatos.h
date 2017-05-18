@@ -1,7 +1,6 @@
 #ifndef BASEDEDATOS_H_
 #define BASEDEDATOS_H_
 
-
 #include <string.h>
 #include <iostream>
 #include "estructuras.h"
@@ -10,8 +9,6 @@
 #include <stdio.h>
 #include "Multa.h"
 
-
-
 namespace std {
 
 class BaseDeDatos {
@@ -19,7 +16,6 @@ class BaseDeDatos {
 	char *nombreBD;
 
 	sqlite3_stmt *stmt;
-
 
 public:
 
@@ -36,16 +32,19 @@ public:
 	int borrarTablaMultas();
 	int borrarTablaUsuarios();
 
-	int insertPaso(int numeroPaso, int numeroRadar, char* matricula, int velocidadCoche);
+	int insertPaso(int numeroPaso, int numeroRadar, char* matricula,
+			int velocidadCoche);
 	int deletePaso(int numeroPaso);
 
-	int insertUsuario(char *dni, char *nombre, char *apellidos, char*direccion, char*matricula, int telefono);
+	int insertUsuario(char *dni, char *nombre, char *apellidos, char*direccion,
+			char*matricula, int telefono);
 	int deleteUsuario();
 
 	int insertRadar(int numeroRadar, int velocidad, int margen);
 	int deleteRadar(int numeroRadar);
 
-	int insertMulta(int numeroMulta, char *matricula, int velocidadCoche, int velocidadRadar, int importe, int puntos);
+	int insertMulta(int numeroMulta, char *matricula, int velocidadCoche,
+			int velocidadRadar, int importe, int puntos, int numeroRadar);
 	int deleteMulta();
 
 	int selectPaso(int numeroPaso);
@@ -54,14 +53,20 @@ public:
 	Multa * selectMulta(int numeroMulta);
 	void verMultas(char *matricula);
 	Usuario *selectUsuario();
-
+	void verMayoresMultas();
 	int selectImporteTotal();
 	int selectPuntosTotal();
 
-
+	int numeroMultas(int numeroRadar);
+	int numeroPasos(int numeroRadar);
 
 	BaseDeDatos(const char * nombre);
 	virtual ~BaseDeDatos();
+
+	void MaximoRadar();
+	void UsuarioMasMultas();
+	void masMultas();
+	void menosMultas();
 };
 
 } /* namespace std */

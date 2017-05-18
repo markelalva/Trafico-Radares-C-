@@ -25,6 +25,7 @@ public:
 	void verTotalDinero(BaseDeDatos *bd, int numeroMultas);
 	void verTotalPuntos(BaseDeDatos *bd, int numeroMultas);
 	void verMultasUsuario(BaseDeDatos *bd, int numeroMultas);
+	void verPromedioMultas(BaseDeDatos *bd, int numeroRadares);
 };
 
 } /* namespace std */

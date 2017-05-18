@@ -15,17 +15,19 @@ Multa::Multa() {
 	this->puntos = 0;
 	this->velocidadCoche = 0;
 	this->velocidadRadar = 0;
+	this->numeroRadar =0;
 
 }
 
 Multa::Multa(int numeroMulta, int velocidadCoche, int velocidadRadar,
-		char *matricula) {
+		char *matricula, int numeroRadar) {
 	// TODO Auto-generated constructor stub
 	this->numeroMulta = numeroMulta;
 	this->matricula = new char[8];
 	strcpy(this->matricula, matricula);
 	this->velocidadCoche = velocidadCoche;
 	this->velocidadRadar = velocidadRadar;
+	this->numeroRadar = numeroRadar;
 	switch (velocidadRadar) {
 	case 80:
 		if (velocidadCoche >= 81 && velocidadCoche <= 110) {
@@ -110,6 +112,9 @@ Multa::Multa(const Multa &multa) {
 	this->puntos = multa.puntos;
 	this->matricula = new char[strlen(multa.matricula) + 1];
 	strcpy(this->matricula, multa.matricula);
+	this->velocidadRadar = multa.velocidadRadar;
+	this->velocidadCoche = multa.velocidadCoche;
+	this->numeroRadar = multa.numeroRadar;
 
 }
 
@@ -117,9 +122,9 @@ void Multa::visualizarMulta() {
 	cout << "Multa numero: " << this->numeroMulta
 			<< " Se ha puesto una multa a " << this->matricula
 			<< " con un importe de :" << this->importe
-			<< " y un total de puntos de: " << this->puntos << "Por circular a "
+			<< " y un total de puntos de: " << this->puntos << " .Por circular a "
 			<< this->velocidadCoche << " teniendo la velocidad limitada a "
-			<< this->velocidadRadar << endl;
+			<< this->velocidadRadar << " por el radar: " << this->numeroRadar << endl;
 	;
 
 }
@@ -144,6 +149,9 @@ int Multa::getVelocidadCoche(){
 int Multa::getvelocidadRadar(){
 	return this->velocidadRadar;
 }
+int Multa::getnumeroRadar(){
+	return this->numeroRadar;
+}
 
 void Multa::setImporte(int importe) {
 	this->importe = importe;
@@ -167,6 +175,10 @@ void Multa::setVelocidadCoche(int velocidadCoche) {
 
 void Multa::setVelocidadRadar(int velocidadRadar) {
 	this->velocidadRadar = velocidadRadar;
+}
+
+void Multa::setnumeroRadar(int numeroRadar){
+	this->numeroRadar = numeroRadar;
 }
 }
 

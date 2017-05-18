@@ -106,7 +106,7 @@ int BaseDeDatos::borrarTablaRadares() {
 
 int BaseDeDatos::crearTablaMultas() {
 	char *query =
-			"create table Multas( numeroMulta integer primary key not null, matricula integer not null, velocidadCoche integer not null, velocidadRadar integer not null, importe integer not null, puntos integer not null)";
+			"create table Multas( numeroMulta integer primary key not null, matricula integer not null, velocidadCoche integer not null, velocidadRadar integer not null, importe integer not null, puntos integer not null, numeroRadar integer not null)";
 	char* error = new char[100];
 	int result = sqlite3_exec(db, query, NULL, 0, &error);
 
@@ -262,7 +262,9 @@ int BaseDeDatos::insertRadar(int numeroRadar, int velocidad, int margen) {
 
 }
 
-int BaseDeDatos::insertMulta(int numeroMulta, char *matricula, int velocidadCoche, int velocidadRadar, int importe, int puntos) {
+int BaseDeDatos::insertMulta(int numeroMulta, char *matricula,
+		int velocidadCoche, int velocidadRadar, int importe, int puntos,
+		int numeroRadar) {
 	char * error = new char[140];
 	char *query = new char[140];
 	strcpy(query, "insert into Multas values(");
@@ -293,11 +295,13 @@ int BaseDeDatos::insertMulta(int numeroMulta, char *matricula, int velocidadCoch
 	char *puntosC = new char[2];
 	sprintf(puntosC, "%i", puntos);
 	strcat(query, puntosC);
+	strcat(query, coma);
+	char *numeroRadarC = new char[3];
+	sprintf(numeroRadarC, "%i", numeroRadar);
+	strcat(query, numeroRadarC);
 	char *final = new char[2];
 	final = ");";
 	strcat(query, final);
-
-	cout <<query<<endl;
 
 	//Ejecutamos la orden
 
@@ -335,7 +339,8 @@ int BaseDeDatos::deleteRadar(int numeroRadar) {
 
 }
 
-int BaseDeDatos::insertUsuario(char *dni, char *nombre, char *apellidos, char*direccion, char*matricula, int telefono) {
+int BaseDeDatos::insertUsuario(char *dni, char *nombre, char *apellidos,
+		char*direccion, char*matricula, int telefono) {
 	char *query = new char[250];
 	char *error = new char[140];
 	strcpy(query, "insert into Usuarios values(");
@@ -350,27 +355,26 @@ int BaseDeDatos::insertUsuario(char *dni, char *nombre, char *apellidos, char*di
 	strcat(query, apostrofe);
 	strcat(query, nombre);
 	strcat(query, apostrofe);
-	strcat(query,coma);
+	strcat(query, coma);
 	strcat(query, apostrofe);
 	strcat(query, apellidos);
 	strcat(query, apostrofe);
-	strcat(query,coma);
+	strcat(query, coma);
 	strcat(query, apostrofe);
-	strcat(query,direccion);
-	strcat(query,apostrofe);
-	strcat(query,coma);
-	strcat(query,apostrofe);
+	strcat(query, direccion);
+	strcat(query, apostrofe);
+	strcat(query, coma);
+	strcat(query, apostrofe);
 	strcat(query, matricula);
-	strcat(query,apostrofe);
-	strcat(query,coma);
+	strcat(query, apostrofe);
+	strcat(query, coma);
 	char *telefonoC = new char[10];
 	sprintf(telefonoC, "%i", telefono);
-	strcat(query,telefonoC);
+	strcat(query, telefonoC);
 	char *final = new char[2];
 	final = ");";
 	strcat(query, final);
-	cout <<query<< endl;
-
+	cout << query << endl;
 
 	int result = sqlite3_exec(db, query, NULL, 0, &error);
 
@@ -531,34 +535,33 @@ int BaseDeDatos::selectImporteTotal() {
 	return importeTotal;
 
 }
-int BaseDeDatos::selectPuntosTotal(){
-char*query = new char[140];
-strcpy(query,"SELECT SUM(PUNTOS) FROM MULTAS");
+int BaseDeDatos::selectPuntosTotal() {
+	char*query = new char[140];
+	strcpy(query, "SELECT SUM(PUNTOS) FROM MULTAS");
 
-int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
-    if (result != SQLITE_OK) {
-        cout << "Error preparing statement (SELECT)" << endl;
-    }
-    int SumaTotal = 0;
-    do {
-        result = sqlite3_step(stmt);
-        if (result == SQLITE_ROW) {
-            SumaTotal = sqlite3_column_int(stmt, 0);
-        }
-    } while (result == SQLITE_ROW);
-    return SumaTotal;
-}
-
-void BaseDeDatos::verMultas(char *matricula ){
-char *query = new char[140];
-strcpy(query, "SELECT * FROM MULTAS WHERE MATRICULA = '");
-strcat(query, matricula);
-strcat(query, "';");
-
-int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
 	if (result != SQLITE_OK) {
 		cout << "Error preparing statement (SELECT)" << endl;
-		printf("%s\n", sqlite3_errmsg(db));
+	}
+	int SumaTotal = 0;
+	do {
+		result = sqlite3_step(stmt);
+		if (result == SQLITE_ROW) {
+			SumaTotal = sqlite3_column_int(stmt, 0);
+		}
+	} while (result == SQLITE_ROW);
+	return SumaTotal;
+}
+
+void BaseDeDatos::verMultas(char *matricula) {
+	char *query = new char[140];
+	strcpy(query, "SELECT * FROM MULTAS WHERE MATRICULA = '");
+	strcat(query, matricula);
+	strcat(query, "';");
+
+	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)" << endl;
 	}
 	Multa *e = new Multa();
 	do {
@@ -570,6 +573,7 @@ int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
 			e->setVelocidadRadar(sqlite3_column_int(stmt, 3));
 			e->setImporte(sqlite3_column_int(stmt, 4));
 			e->setPuntos(sqlite3_column_int(stmt, 5));
+			e->setnumeroRadar(sqlite3_column_int(stmt, 6));
 
 		}
 		//La mostramos
@@ -577,9 +581,109 @@ int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
 
 	} while (result == SQLITE_ROW);
 
+}
+
+void BaseDeDatos::MaximoRadar() {
+	char*query = new char[140];
+	char *query2 = new char[140];
+	strcpy(query,
+			"CREATE VIEW V1 (NUMR_RADAR, TOT_PASOS) AS SELECT  R.NUMERORADAR, SUM(P.NUMEROPASO) FROM RADARES R, PASOS P WHERE R.NUMERORADAR = P.NUMERORADAR");
+	//Creamos la vista
+	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)" << endl;
+		cout << sqlite3_errmsg(db) << endl;
+	}
+
+
+}
+void BaseDeDatos::masMultas() {
+	char*query = new char[140];
+	char *query2 = new char[140];
+	strcpy(query,
+			"CREATE VIEW VMULTAS (NUM_R, TOT_MULTAS) AS SELECT RADARES.NUMERORADAR, COUNT(MULTAS.NUMEROMULTA) FROM RADARES, MULTAS WHERE RADARES.NUMERORADAR = MULTAS.NUMERORADAR; ");
+	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)" << endl;
+		cout << sqlite3_errmsg(db) << endl;
+	}
 
 }
 
+int BaseDeDatos::numeroMultas(int numeroRadar) {
+	char*query = new char[140];
+	strcpy(query, "SELECT COUNT(NUMEROMULTA) FROM MULTAS WHERE NUMERORADAR =");
+	char *numeroRadarC = new char[3];
+	sprintf(numeroRadarC, "%i", numeroRadar);
+	strcat(query, numeroRadarC);
+	strcat(query, ";");
+
+	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)" << endl;
+	}
+	int numeroMultas = 0;
+	do {
+		result = sqlite3_step(stmt);
+		if (result == SQLITE_ROW) {
+			numeroMultas = sqlite3_column_int(stmt, 0);
+		}
+	} while (result == SQLITE_ROW);
+
+	return numeroMultas;
+
+}
+
+int BaseDeDatos::numeroPasos(int numeroRadar) {
+	char*query = new char[140];
+	strcpy(query, "SELECT COUNT(NUMEROPASO) FROM PASOS WHERE NUMERORADAR =");
+	char *numeroRadarC = new char[3];
+	sprintf(numeroRadarC, "%i", numeroRadar);
+	strcat(query, numeroRadarC);
+	strcat(query, ";");
+
+	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)" << endl;
+	}
+	int numeroPasos = 0;
+	do {
+		result = sqlite3_step(stmt);
+		if (result == SQLITE_ROW) {
+			numeroPasos = sqlite3_column_int(stmt, 0);
+		}
+	} while (result == SQLITE_ROW);
+
+	return numeroPasos;
+
+}
+
+void BaseDeDatos::verMayoresMultas() {
+	char *query = new char[140];
+	strcpy(query, "SELECT * FROM MULTAS WHERE IMPORTE = 600 AND PUNTOS = 6;");
+	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)" << endl;
+	}
+	Multa *e = new Multa();
+	do {
+		result = sqlite3_step(stmt);
+		if (result == SQLITE_ROW) {
+			e->setnumeroMulta(sqlite3_column_int(stmt, 0));
+			e->setMatricula((char*) sqlite3_column_text(stmt, 1));
+			e->setVelocidadCoche(sqlite3_column_int(stmt, 2));
+			e->setVelocidadRadar(sqlite3_column_int(stmt, 3));
+			e->setImporte(sqlite3_column_int(stmt, 4));
+			e->setPuntos(sqlite3_column_int(stmt, 5));
+			e->setnumeroRadar(sqlite3_column_int(stmt, 6));
+
+		}
+		//La mostramos
+		e->visualizarMulta();
+
+	} while (result == SQLITE_ROW);
+
+}
 
 }
 /* namespace std */
