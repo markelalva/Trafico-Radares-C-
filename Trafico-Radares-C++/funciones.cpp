@@ -124,4 +124,147 @@ void funciones::mostrarMultas(int numeroMultas, BaseDeDatos *bd) {
 
 	}
 }
+
+void funciones::radarMasTransitado(int numeroRadares, int numeroPasos,
+		BaseDeDatos *bd) {
+
+	int *contadorRadares = new int[numeroRadares - 1];
+	//Inicializamos todos los contadores a 0
+	for (int i = 0; i < numeroRadares; i++) {
+		contadorRadares[i] = 0;
+	}
+
+	//Recuperamos de la BD el radar de cada paso
+	for (int i = 0; i < numeroPasos; i++) {
+		int radar = bd->selectRadarPaso(i);
+		contadorRadares[radar]++;
+	}
+
+	//Obtenemos cual es el mayor
+
+	int mayor = -1;
+	int posicion = -1;
+
+	for (int i = 0; i < numeroRadares; i++) {
+		if (contadorRadares[i] > mayor) {
+			mayor = contadorRadares[i];
+			posicion = i;
+
+		}
+	}
+
+	//Ahora mostramos cual es el radar mas transitado
+
+	Radar *e = bd->selectRadar(posicion);
+
+	cout << "El radar mas transitado es " << e->numeroRadar
+			<< " que tiene una velocidad de " << e->velocidad << endl;
+
+}
+
+void funciones::radarMenosTransitado(int numeroRadares, int numeroPasos,
+		BaseDeDatos *bd) {
+
+	int *contadorRadares = new int[numeroRadares - 1];
+	//Inicializamos todos los contadores a 0
+	for (int i = 0; i < numeroRadares; i++) {
+		contadorRadares[i] = 0;
+	}
+
+	//Recuperamos de la BD el radar de cada paso
+	for (int i = 0; i < numeroPasos; i++) {
+		int radar = bd->selectRadarPaso(i);
+		contadorRadares[radar]++;
+	}
+
+	//Obtenemos cual es el mayor
+
+	int menor = 100000;
+	int posicion = -1;
+
+	for (int i = 0; i < numeroRadares; i++) {
+		if (contadorRadares[i] < menor) {
+			menor = contadorRadares[i];
+			posicion = i;
+
+		}
+	}
+
+	//Ahora mostramos cual es el radar mas transitado
+
+	Radar *e = bd->selectRadar(posicion);
+
+	cout << "El radar menos transitado es " << e->numeroRadar
+			<< " que tiene una velocidad de " << e->velocidad << endl;
+
+}
+
+void funciones::radarMasMultas(int numeroRadares, int numeroMultas, BaseDeDatos *bd){
+	int *contadorRadares = new int[numeroRadares - 1];
+	//Inicializamos todos los contadores a 0
+	for (int i = 0; i < numeroRadares; i++) {
+		contadorRadares[i] = 0;
+	}
+
+	for (int i = 0; i < numeroMultas; i++) {
+		int radar = bd->selectRadarMulta(i);
+		contadorRadares[radar]++;
+	}
+
+	//Obtenemos cual es el mayor
+
+		int mayor = -1;
+		int posicion = -1;
+
+		for (int i = 0; i < numeroRadares; i++) {
+			if (contadorRadares[i] > mayor) {
+				mayor = contadorRadares[i];
+				posicion = i;
+
+			}
+		}
+
+		//Ahora mostramos cual es el radar mas transitado
+
+		Radar *e = bd->selectRadar(posicion);
+
+		cout << "El radar con mas multas es " << e->numeroRadar
+				<< " que tiene una velocidad de " << e->velocidad << endl;
+
+}
+
+void funciones::radarMenosMultas(int numeroRadares, int numeroMultas, BaseDeDatos *bd){
+	int *contadorRadares = new int[numeroRadares - 1];
+		//Inicializamos todos los contadores a 0
+		for (int i = 0; i < numeroRadares; i++) {
+			contadorRadares[i] = 0;
+		}
+
+		for (int i = 0; i < numeroMultas; i++) {
+			int radar = bd->selectRadarMulta(i);
+			contadorRadares[radar]++;
+		}
+
+		//Obtenemos cual es el menor
+
+			int menor = 10000000000;
+			int posicion = -1;
+
+			for (int i = 0; i < numeroRadares; i++) {
+				if (contadorRadares[i] < menor) {
+					menor = contadorRadares[i];
+					posicion = i;
+
+				}
+			}
+
+			//Ahora mostramos cual es el radar mas transitado
+
+			Radar *e = bd->selectRadar(posicion);
+
+			cout << "El radar con menos multas es " << e->numeroRadar
+					<< " que tiene una velocidad de " << e->velocidad << endl;
+
+
+}
 }

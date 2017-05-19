@@ -112,7 +112,7 @@ void menus::verTotalMultas(int numeroMultas, funciones *f, BaseDeDatos *bd) {
 		cout << "Todas las multas han sido mostradas" << endl;
 	} else {
 		cout
-				<< "No existe ninguna multa almacenada en la Base De Datos, genéralas y vuelve a intentarlo"
+				<< "No existe ninguna multa almacenada en la Base De Datos, genï¿½ralas y vuelve a intentarlo"
 				<< endl;
 	}
 	cout << "Presione 0 para volver al menu principal" << endl;
@@ -136,7 +136,7 @@ void menus::verTotalDinero(BaseDeDatos *bd, int numeroMultas) {
 				<< numeroMultas << " multas." << endl;
 	} else {
 		cout
-				<< "No existe ninguna multa almacenada en la Base De Datos, genéralas y vuelve a intentarlo"
+				<< "No existe ninguna multa almacenada en la Base De Datos, genï¿½ralas y vuelve a intentarlo"
 				<< endl;
 	}
 	cout << "Presione 0 para volver al menu principal" << endl;
@@ -160,7 +160,7 @@ void menus::verTotalPuntos(BaseDeDatos *bd, int numeroMultas) {
 				<< numeroMultas << " multas." << endl;
 	} else {
 		cout
-				<< "No existe ninguna multa almacenada en la Base De Datos, genéralas y vuelve a intentarlo"
+				<< "No existe ninguna multa almacenada en la Base De Datos, genï¿½ralas y vuelve a intentarlo"
 				<< endl;
 	}
 	cout << "Presione 0 para volver al menu principal" << endl;
@@ -183,7 +183,7 @@ void menus::verMultasUsuario(BaseDeDatos *bd, int numeroMultas) {
 		bd->verMultas(matricula);
 	} else {
 		cout
-				<< "No existe ninguna multa almacenada en la Base De Datos, genéralas y vuelve a intentarlo"
+				<< "No existe ninguna multa almacenada en la Base De Datos, genï¿½ralas y vuelve a intentarlo"
 				<< endl;
 	}
 	cout << "Presione 0 para volver al menu principal" << endl;
@@ -222,6 +222,59 @@ while (opcion != 0) {
 }
 
 
+}
+
+void menus::verRadarMasTransitado(int numeroRadares,int  numeroPasos,BaseDeDatos *bd, funciones *f){
+int opcion =0;
+f->radarMasTransitado(numeroRadares, numeroPasos, bd);
+cout << "Presione 0 para volver al menu principal" << endl;
+cin >> opcion;
+
+while (opcion != 0) {
+	cout << "ERROR! Presione 0 para volver al menu principal" << endl;
+	cin >> opcion;
+}
+
+
+}
+
+void menus::verRadarMenosTransitado(int numeroRadares,int numeroPasos,BaseDeDatos *bd, funciones *f){
+	int opcion =0;
+	f->radarMenosTransitado(numeroRadares, numeroPasos, bd);
+	cout << "Presione 0 para volver al menu principal" << endl;
+	cin >> opcion;
+
+	while (opcion != 0) {
+		cout << "ERROR! Presione 0 para volver al menu principal" << endl;
+		cin >> opcion;
+	}
+
+}
+
+void menus::verRadarMasMultas(int numeroRadares, int numeroMultas, BaseDeDatos *bd){
+	int opcion =0;
+	f->radarMasMultas(numeroRadares, numeroMultas, bd);
+	cout << "Presione 0 para volver al menu principal" << endl;
+	cin >> opcion;
+
+	while (opcion != 0) {
+		cout << "ERROR! Presione 0 para volver al menu principal" << endl;
+		cin >> opcion;
+	}
+
+
+}
+
+void menus::verRadarMenosMultas(int numeroRadares,int numeroMultas,BaseDeDatos  *bd){
+	int opcion =0;
+	f->radarMenosMultas(numeroRadares, numeroMultas, bd);
+	cout << "Presione 0 para volver al menu principal" << endl;
+	cin >> opcion;
+
+	while (opcion != 0) {
+		cout << "ERROR! Presione 0 para volver al menu principal" << endl;
+		cin >> opcion;
+	}
 }
 
 } /* namespace std */

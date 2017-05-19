@@ -47,7 +47,6 @@ public:
 			int velocidadRadar, int importe, int puntos, int numeroRadar);
 	int deleteMulta();
 
-	int selectPaso(int numeroPaso);
 	Paso * selectArrayPasos(int numeroPasos);
 	Radar *selectRadar(int numeroRadar);
 	Multa * selectMulta(int numeroMulta);
@@ -57,16 +56,14 @@ public:
 	int selectImporteTotal();
 	int selectPuntosTotal();
 
+	int selectRadarPaso(int numeroPaso);
+	int selectRadarMulta(int numeroMulta);
+
 	int numeroMultas(int numeroRadar);
 	int numeroPasos(int numeroRadar);
 
 	BaseDeDatos(const char * nombre);
 	virtual ~BaseDeDatos();
-
-	void MaximoRadar();
-	void UsuarioMasMultas();
-	void masMultas();
-	void menosMultas();
 };
 
 } /* namespace std */

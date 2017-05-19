@@ -30,6 +30,10 @@ public:
 	int comprobarPaso (int numeroPasos, int numeroRadares, BaseDeDatos *bd);
 	void mostrarMultas(int numeroMultas, BaseDeDatos *bd);
 	virtual ~funciones();
+	void radarMasTransitado(int numeroRadares, int numeroPasos, BaseDeDatos *bd);
+	void radarMenosTransitado(int numeroRadares, int numeroPasos, BaseDeDatos *bd);
+	void radarMasMultas(int numeroRadares, int numeroMultas, BaseDeDatos *bd);
+	void radarMenosMultas(int numeroRadares, int numeroMultas, BaseDeDatos *bd);
 
 };
 

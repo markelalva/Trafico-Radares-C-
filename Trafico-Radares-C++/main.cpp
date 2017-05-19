@@ -71,10 +71,10 @@ opcion1 = m->MenuEstadisticas();
 switch (opcion1){
 
 case 1:
-	cout <<"Opcion 1" << endl;
-	bd->MaximoRadar();
+	m->verRadarMasTransitado(numeroRadares, numeroPasos, bd, f);
 	break;
 case 2:
+	m->verRadarMenosTransitado(numeroRadares, numeroPasos, bd, f);
 	break;
 case 3:
 	break;
