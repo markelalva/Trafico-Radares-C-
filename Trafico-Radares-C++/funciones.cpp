@@ -63,6 +63,9 @@ int funciones::cargarUsuarios(BaseDeDatos *bd, FILE *usuarios) {
 	int i;
 	for (i = 0; i < numeroUsuarios; i++) {
 		//Metodo insertar usuario (Pendiente)
+		bd->insertUsuario(listaUsuarios[i].dni, listaUsuarios[i].nombre,
+				listaUsuarios[i].apellidos, listaUsuarios[i].direccion,
+				listaUsuarios[i].matricula, listaUsuarios[i].telefono);
 	}
 
 	return numeroUsuarios;
@@ -114,11 +117,12 @@ int funciones::comprobarPaso(int numeroPasos, int numeroRadares,
 				listaMultas[i]->getnumeroRadar());
 
 	}
+	cout <<"Se han generado " << contadorMultas << " multas." << endl;
 	return contadorMultas++;
 }
 
 void funciones::mostrarMultas(int numeroMultas, BaseDeDatos *bd) {
-	for (int i = 0; i <= numeroMultas; i++) {
+	for (int i = 0; i < numeroMultas; i++) {
 		Multa *e = bd->selectMulta(i);
 		e->visualizarMulta();
 
@@ -272,22 +276,16 @@ void funciones::radarMenosMultas(int numeroRadares, int numeroMultas,
 void funciones::usuarioMasMultas(int numeroUsuarios, int numeroMultas,
 		BaseDeDatos *bd) {
 	Usuario *listaUsuarios = bd->selectArrayUsuarios(numeroUsuarios);
-	int *contadorUsuarios = new int[numeroUsuarios];
-	//Inicializamos todos los contadores a 0
-	for (int i = 0; i < numeroUsuarios; i++) {
-		contadorUsuarios[i] = 0;
-	}
 
+	int *contadorUsuarios = new int[numeroUsuarios];
 	for (int i = 0; i < numeroMultas; i++) {
 		char *matricula = bd->selectUsuarioMulta(i);
-		for (int j = 0; i < numeroUsuarios; j++) {
+		for (int j = 0; j < numeroUsuarios; j++) {
 			if (strcmp(matricula, listaUsuarios[j].matricula) == 0) {
 				contadorUsuarios[j]++;
 
 			}
-
 		}
-
 	}
 
 	int mayor = -1;
@@ -301,9 +299,37 @@ void funciones::usuarioMasMultas(int numeroUsuarios, int numeroMultas,
 		}
 	}
 
-	cout << "El usuario con mas multas es " << listaUsuarios[posicion].matricula << endl;
+	cout << "El usuario con mas multas es " << listaUsuarios[posicion].nombre << " con el coche matricula " << listaUsuarios[posicion].matricula <<  endl;
 
+}
 
+void funciones::usuarioMenosMultas(int numeroUsuarios, int numeroMultas,
+		BaseDeDatos *bd) {
+	Usuario *listaUsuarios = bd->selectArrayUsuarios(numeroUsuarios);
+
+	int *contadorUsuarios = new int[numeroUsuarios];
+	for (int i = 0; i < numeroMultas; i++) {
+		char *matricula = bd->selectUsuarioMulta(i);
+		for (int j = 0; j < numeroUsuarios; j++) {
+			if (strcmp(matricula, listaUsuarios[j].matricula) == 0) {
+				contadorUsuarios[j]++;
+
+			}
+		}
+	}
+
+	int menor = 10000000;
+	int posicion = -1;
+
+	for (int i = 0; i < numeroUsuarios; i++) {
+		if (contadorUsuarios[i] < menor) {
+			menor = contadorUsuarios[i];
+			posicion = i;
+
+		}
+	}
+
+	cout << "El usuario con menos multas es " << listaUsuarios[posicion].nombre << " con el coche matricula " << listaUsuarios[posicion].matricula <<  endl;
 
 }
 }

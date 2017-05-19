@@ -53,7 +53,7 @@ int BaseDeDatos::crearTablaPasos() {
 	if (result != SQLITE_OK) {
 		cout << "Error al crear la tabla :    " << error << endl;
 	} else {
-		cout << "Tabla Pasos creada \n";
+		//cout << "Tabla Pasos creada \n";
 	}
 	return result;
 
@@ -83,7 +83,7 @@ int BaseDeDatos::crearTablaRadares() {
 	if (result != SQLITE_OK) {
 		cout << "Error al crear la tabla Radares " << error << endl;
 	} else {
-		cout << "Tabla Radares creada" << endl;
+		//cout << "Tabla Radares creada" << endl;
 	}
 	return result;
 
@@ -113,7 +113,7 @@ int BaseDeDatos::crearTablaMultas() {
 	if (result != SQLITE_OK) {
 		cout << "Error al crear la tabla Multas " << error << endl;
 	} else {
-		cout << "Tabla Multas creada" << endl;
+		//cout << "Tabla Multas creada" << endl;
 	}
 	return result;
 
@@ -143,7 +143,7 @@ int BaseDeDatos::crearTablaUsuarios() {
 	if (result != SQLITE_OK) {
 		cout << "Error al crear la tabla Usuarios " << error << endl;
 	} else {
-		cout << "Tabla Usuarios creada" << endl;
+		//cout << "Tabla Usuarios creada" << endl;
 	}
 	return result;
 
@@ -205,27 +205,6 @@ int BaseDeDatos::insertPaso(int numeroPaso, int numeroRadar, char* matricula,
 
 }
 
-int BaseDeDatos::deletePaso(int numeroPaso) {
-	char *query = new char[140];
-	char *error = new char[140];
-	strcpy(query, "delete from Pasos WHERE numeroPaso = ");
-	char *numeroPasoC = new char[3];
-	sprintf(numeroPasoC, "%i", numeroPaso);
-	strcat(query, numeroPasoC);
-	char *final = new char[1];
-	final = ";";
-	strcat(query, final);
-	//Ejecutamos la orden
-	int result = sqlite3_exec(db, query, NULL, 0, &error);
-
-	if (result != SQLITE_OK) {
-		cout << "Error al borrar" << endl;
-	} else {
-		cout << "Borrado correcto" << endl;
-	}
-	return result;
-
-}
 
 int BaseDeDatos::insertRadar(int numeroRadar, int velocidad, int margen) {
 
@@ -310,30 +289,7 @@ int BaseDeDatos::insertMulta(int numeroMulta, char *matricula,
 	if (result != SQLITE_OK) {
 		cout << "Error al insertar " << error << endl;
 	} else {
-		cout << "Multa insertada correctamente" << endl;
-	}
-	return result;
-
-}
-int BaseDeDatos::deleteRadar(int numeroRadar) {
-
-	char *query = new char[140];
-	char *error = new char[140];
-	strcpy(query, "delete from Radares WHERE numeroRadar = ");
-	char *numeroRadarC = new char[3];
-	sprintf(numeroRadarC, "%i", numeroRadar);
-	strcat(query, numeroRadarC);
-	char *final = new char[1];
-	final = ";";
-	strcat(query, final);
-
-	//Ejecutamos la orden
-	int result = sqlite3_exec(db, query, NULL, 0, &error);
-
-	if (result != SQLITE_OK) {
-		cout << "Error al borrar" << endl;
-	} else {
-		cout << "Borrado correcto" << endl;
+		//cout << "Multa insertada correctamente" << endl;
 	}
 	return result;
 
@@ -374,14 +330,13 @@ int BaseDeDatos::insertUsuario(char *dni, char *nombre, char *apellidos,
 	char *final = new char[2];
 	final = ");";
 	strcat(query, final);
-	cout << query << endl;
 
 	int result = sqlite3_exec(db, query, NULL, 0, &error);
 
 	if (result != SQLITE_OK) {
 		cout << "Error al insertar " << error << endl;
 	} else {
-		cout << "Usuario insertado correctamente" << endl;
+		//cout << "Usuario insertado correctamente" << endl;
 	}
 	return result;
 
@@ -466,7 +421,6 @@ Multa * BaseDeDatos::selectMulta(int numeroMulta) {
 	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
 	if (result != SQLITE_OK) {
 		cout << "Error preparing statement (SELECT)" << endl;
-		printf("%s\n", sqlite3_errmsg(db));
 	}
 	Multa *e = new Multa();
 	char *matricula = new char[8];
@@ -697,7 +651,7 @@ char* BaseDeDatos::selectUsuarioMulta(int numeroMulta) {
 	do {
 		result = sqlite3_step(stmt);
 		if (result == SQLITE_ROW) {
-			strcpy(matricula, (char*)sqlite3_column_text(stmt, 0));
+			strcpy(matricula, (char*) sqlite3_column_text(stmt, 0));
 
 		}
 
@@ -707,9 +661,8 @@ char* BaseDeDatos::selectUsuarioMulta(int numeroMulta) {
 }
 Usuario * BaseDeDatos::selectArrayUsuarios(int numeroUsuarios) {
 	char *query = new char[140];
-	char *error = new char[140];
 
-	strcpy(query, "SELECT * FROM USUARIOS;");
+	strcpy(query, "SELECT * FROM USUARIOS ;");
 
 	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
 	if (result != SQLITE_OK) {
@@ -721,20 +674,17 @@ Usuario * BaseDeDatos::selectArrayUsuarios(int numeroUsuarios) {
 	do {
 		result = sqlite3_step(stmt);
 		if (result == SQLITE_ROW) {
-			Usuario e;
-			char *nombre = new char[15];
-			char *apellidos = new char[25];
-			char *direccion = new char[30];
-			char *matricula = new char[8];
-			char *dni = new char[10];
 
-			strcpy(nombre, (char*) sqlite3_column_text(stmt, 0));
-			strcpy(apellidos, (char*) sqlite3_column_text(stmt, 1));
-			strcpy(direccion, (char*) sqlite3_column_text(stmt, 2));
-			strcpy(matricula, (char*) sqlite3_column_text(stmt, 3));
-			e.telefono = sqlite3_column_int(stmt,4);
+			Usuario e;
+			strcpy(e.dni, (char*) sqlite3_column_text(stmt, 0));
+			strcpy(e.nombre, (char*) sqlite3_column_text(stmt, 1));
+			strcpy(e.apellidos, (char*) sqlite3_column_text(stmt, 2));
+			strcpy(e.direccion, (char*) sqlite3_column_text(stmt, 3));
+			strcpy(e.matricula, (char*) sqlite3_column_text(stmt, 4));
+			e.telefono = sqlite3_column_int(stmt, 5);
 			listaUsuarios[contador] = e;
 			contador++;
+
 		}
 	} while (result == SQLITE_ROW);
 

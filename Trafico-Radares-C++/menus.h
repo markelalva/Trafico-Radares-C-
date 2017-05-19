@@ -31,7 +31,7 @@ public:
 	void verRadarMasMultas(int numeroRadares, int numeroMultas, BaseDeDatos *bd, funciones *f);
 	void verRadarMenosMultas(int numeroRadares, int numeroMultas, BaseDeDatos *bd, funciones *f);
 	void verUsuarioMasMultas(int numeroUsuarios, int numeroMultas, BaseDeDatos *bd, funciones *f);
-	void verUsuarioMenosMultas(int numeroUsuarios, int numeroMultas, BaseDeDatos *bd);
+	void verUsuarioMenosMultas(int numeroUsuarios, int numeroMultas, BaseDeDatos *bd, funciones *f);
 };
 
 } /* namespace std */

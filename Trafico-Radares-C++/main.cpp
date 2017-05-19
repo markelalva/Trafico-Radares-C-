@@ -86,6 +86,7 @@ case 5:
 	m->verUsuarioMasMultas(numeroUsuarios, numeroMultas, bd,f);
 	break;
 case 6:
+	m->verUsuarioMenosMultas(numeroUsuarios, numeroMultas, bd,f);
 	break;
 case 7:
 	bd->verMayoresMultas();
@@ -136,5 +137,7 @@ cout <<"Gracias por usar el programa, esperemos le haya sido util" << endl;
 
 return 0;
 }
+
+
 
  /* namespace std */
