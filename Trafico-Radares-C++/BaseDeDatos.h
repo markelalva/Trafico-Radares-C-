@@ -52,12 +52,14 @@ public:
 	Multa * selectMulta(int numeroMulta);
 	void verMultas(char *matricula);
 	Usuario *selectUsuario();
+	Usuario * selectArrayUsuarios(int numeroUsuarios);
 	void verMayoresMultas();
 	int selectImporteTotal();
 	int selectPuntosTotal();
 
 	int selectRadarPaso(int numeroPaso);
 	int selectRadarMulta(int numeroMulta);
+	char* selectUsuarioMulta(int numeroMulta);
 
 	int numeroMultas(int numeroRadar);
 	int numeroPasos(int numeroRadar);

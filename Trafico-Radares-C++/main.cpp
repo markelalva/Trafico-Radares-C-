@@ -77,10 +77,13 @@ case 2:
 	m->verRadarMenosTransitado(numeroRadares, numeroPasos, bd, f);
 	break;
 case 3:
+	m->verRadarMasMultas(numeroRadares, numeroMultas, bd,f);
 	break;
 case 4:
+	m->verRadarMenosMultas(numeroRadares, numeroMultas, bd,f);
 	break;
 case 5:
+	m->verUsuarioMasMultas(numeroUsuarios, numeroMultas, bd,f);
 	break;
 case 6:
 	break;

@@ -34,6 +34,8 @@ public:
 	void radarMenosTransitado(int numeroRadares, int numeroPasos, BaseDeDatos *bd);
 	void radarMasMultas(int numeroRadares, int numeroMultas, BaseDeDatos *bd);
 	void radarMenosMultas(int numeroRadares, int numeroMultas, BaseDeDatos *bd);
+	void usuarioMasMultas(int numeroUsuarios, int numeroMultas, BaseDeDatos *bd);
+	void usuarioMenosMultas(int numeroUsuarios, int numeroMultas, BaseDeDatos *bd);
 
 };
 

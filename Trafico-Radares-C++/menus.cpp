@@ -251,7 +251,7 @@ void menus::verRadarMenosTransitado(int numeroRadares,int numeroPasos,BaseDeDato
 
 }
 
-void menus::verRadarMasMultas(int numeroRadares, int numeroMultas, BaseDeDatos *bd){
+void menus::verRadarMasMultas(int numeroRadares, int numeroMultas, BaseDeDatos *bd, funciones *f){
 	int opcion =0;
 	f->radarMasMultas(numeroRadares, numeroMultas, bd);
 	cout << "Presione 0 para volver al menu principal" << endl;
@@ -265,7 +265,7 @@ void menus::verRadarMasMultas(int numeroRadares, int numeroMultas, BaseDeDatos *
 
 }
 
-void menus::verRadarMenosMultas(int numeroRadares,int numeroMultas,BaseDeDatos  *bd){
+void menus::verRadarMenosMultas(int numeroRadares,int numeroMultas,BaseDeDatos  *bd, funciones *f){
 	int opcion =0;
 	f->radarMenosMultas(numeroRadares, numeroMultas, bd);
 	cout << "Presione 0 para volver al menu principal" << endl;
@@ -275,6 +275,24 @@ void menus::verRadarMenosMultas(int numeroRadares,int numeroMultas,BaseDeDatos  
 		cout << "ERROR! Presione 0 para volver al menu principal" << endl;
 		cin >> opcion;
 	}
+}
+
+void menus::verUsuarioMasMultas(int numeroUsuarios,  int numeroMultas,BaseDeDatos *bd, funciones *f){
+	int opcion =0;
+	f->usuarioMasMultas(numeroUsuarios, numeroMultas, bd);
+	cout << "Presione 0 para volver al menu principal" << endl;
+	cin >> opcion;
+
+	while (opcion != 0) {
+		cout << "ERROR! Presione 0 para volver al menu principal" << endl;
+		cin >> opcion;
+	}
+
+
+}
+void menus::verUsuarioMenosMultas(int numeroUsuarios,  int numeroMultas,BaseDeDatos *bd){
+
+
 }
 
 } /* namespace std */

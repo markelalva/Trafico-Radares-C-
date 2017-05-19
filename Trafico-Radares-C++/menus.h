@@ -28,8 +28,10 @@ public:
 	void verPromedioMultas(BaseDeDatos *bd, int numeroRadares);
 	void verRadarMasTransitado(int numeroRadares, int numeroPasos, BaseDeDatos *bd, funciones *f);
 	void verRadarMenosTransitado(int numeroRadares, int numeroPasos, BaseDeDatos *bd, funciones *f);
-	void verRadarMasMultas(int numeroRadares, int numeroMultas, BaseDeDatos *bd);
-	void  verRadarMenosMultas(int numeroRadares, int numeroMultas, BaseDeDatos *bd);
+	void verRadarMasMultas(int numeroRadares, int numeroMultas, BaseDeDatos *bd, funciones *f);
+	void verRadarMenosMultas(int numeroRadares, int numeroMultas, BaseDeDatos *bd, funciones *f);
+	void verUsuarioMasMultas(int numeroUsuarios, int numeroMultas, BaseDeDatos *bd, funciones *f);
+	void verUsuarioMenosMultas(int numeroUsuarios, int numeroMultas, BaseDeDatos *bd);
 };
 
 } /* namespace std */

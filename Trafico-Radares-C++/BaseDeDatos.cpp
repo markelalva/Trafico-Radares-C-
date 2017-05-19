@@ -552,6 +552,29 @@ void BaseDeDatos::verMultas(char *matricula) {
 	} while (result == SQLITE_ROW);
 
 }
+int BaseDeDatos::numeroMultas(int numeroRadar) {
+	char*query = new char[140];
+	strcpy(query, "SELECT COUNT(NUMEROMULTA) FROM MULTAS WHERE NUMERORADAR =");
+	char *numeroRadarC = new char[3];
+	sprintf(numeroRadarC, "%i", numeroRadar);
+	strcat(query, numeroRadarC);
+	strcat(query, ";");
+
+	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)" << endl;
+	}
+	int numeroMulta = 0;
+	do {
+		result = sqlite3_step(stmt);
+		if (result == SQLITE_ROW) {
+			numeroMulta = sqlite3_column_int(stmt, 0);
+		}
+	} while (result == SQLITE_ROW);
+
+	return numeroMulta;
+
+}
 
 int BaseDeDatos::numeroPasos(int numeroRadar) {
 	char*query = new char[140];
@@ -650,12 +673,72 @@ int BaseDeDatos::selectRadarMulta(int numeroMulta) {
 			numeroRadar = sqlite3_column_int(stmt, 0);
 
 		}
-		//La mostramos
 
 	} while (result == SQLITE_ROW);
 
 	return numeroRadar;
 
+}
+
+char* BaseDeDatos::selectUsuarioMulta(int numeroMulta) {
+	char *query = new char[140];
+	strcpy(query, "SELECT matricula FROM MULTAS WHERE numeroMulta = ");
+	char *numeroMultaC = new char[3];
+	sprintf(numeroMultaC, "%i", numeroMulta);
+	strcat(query, numeroMultaC);
+	strcat(query, ";");
+
+	//Lanzamos la consulta
+	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)" << endl;
+	}
+	char *matricula = new char[8];
+	do {
+		result = sqlite3_step(stmt);
+		if (result == SQLITE_ROW) {
+			strcpy(matricula, (char*)sqlite3_column_text(stmt, 0));
+
+		}
+
+	} while (result == SQLITE_ROW);
+	return matricula;
+
+}
+Usuario * BaseDeDatos::selectArrayUsuarios(int numeroUsuarios) {
+	char *query = new char[140];
+	char *error = new char[140];
+
+	strcpy(query, "SELECT * FROM USUARIOS;");
+
+	int result = sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)" << endl;
+	}
+
+	Usuario *listaUsuarios = new Usuario[numeroUsuarios];
+	int contador = 0;
+	do {
+		result = sqlite3_step(stmt);
+		if (result == SQLITE_ROW) {
+			Usuario e;
+			char *nombre = new char[15];
+			char *apellidos = new char[25];
+			char *direccion = new char[30];
+			char *matricula = new char[8];
+			char *dni = new char[10];
+
+			strcpy(nombre, (char*) sqlite3_column_text(stmt, 0));
+			strcpy(apellidos, (char*) sqlite3_column_text(stmt, 1));
+			strcpy(direccion, (char*) sqlite3_column_text(stmt, 2));
+			strcpy(matricula, (char*) sqlite3_column_text(stmt, 3));
+			e.telefono = sqlite3_column_int(stmt,4);
+			listaUsuarios[contador] = e;
+			contador++;
+		}
+	} while (result == SQLITE_ROW);
+
+	return listaUsuarios;
 
 }
 }
