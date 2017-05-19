@@ -69,7 +69,7 @@ int BaseDeDatos::borrarTablaPasos() {
 	if (result != SQLITE_OK) {
 		cout << "Error al borrar la tabla pasos" << endl;
 	} else {
-		cout << "Tabla pasos borrada \n";
+		//cout << "Tabla pasos borrada \n";
 	}
 	return result;
 }
@@ -99,7 +99,7 @@ int BaseDeDatos::borrarTablaRadares() {
 	if (result != SQLITE_OK) {
 		cout << "Error al borrar la tabla radares" << endl;
 	} else {
-		cout << "Tabla radares borrada" << endl;
+		//cout << "Tabla radares borrada" << endl;
 	}
 	return result;
 }
@@ -129,7 +129,7 @@ int BaseDeDatos::borrarTablaMultas() {
 	if (result != SQLITE_OK) {
 		cout << "Error al borrar la tabla Multas" << endl;
 	} else {
-		cout << "Tabla Multas borrada" << endl;
+		//cout << "Tabla Multas borrada" << endl;
 	}
 	return result;
 }
@@ -159,7 +159,7 @@ int BaseDeDatos::borrarTablaUsuarios() {
 	if (result != SQLITE_OK) {
 		cout << "Error al borrar la tabla Usuarios" << endl;
 	} else {
-		cout << "Tabla Usuarios borrada" << endl;
+		//cout << "Tabla Usuarios borrada" << endl;
 	}
 	return result;
 

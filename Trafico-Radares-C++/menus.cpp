@@ -24,8 +24,8 @@ int menus::MenuPrincipal() {
 	//Menu principal
 	int opcion = 0;
 	cout << "Bienvenido al menu principal" << endl;
-	cout << "Elija una opci�n" << endl;
-	cout << "1- Consultar estad�sticas" << endl;
+	cout << "Elija una opcion" << endl;
+	cout << "1- Consultar estadisticas" << endl;
 	cout << "2- Generar multas" << endl;
 	cout << "3- Consultar multas" << endl;
 	cout << "4- Imprimir multas" << endl;
@@ -112,7 +112,7 @@ void menus::verTotalMultas(int numeroMultas, funciones *f, BaseDeDatos *bd) {
 		cout << "Todas las multas han sido mostradas" << endl;
 	} else {
 		cout
-				<< "No existe ninguna multa almacenada en la Base De Datos, gen�ralas y vuelve a intentarlo"
+				<< "No existe ninguna multa almacenada en la Base De Datos, generalas y vuelve a intentarlo"
 				<< endl;
 	}
 	cout << "Presione 0 para volver al menu principal" << endl;
@@ -136,7 +136,7 @@ void menus::verTotalDinero(BaseDeDatos *bd, int numeroMultas) {
 				<< numeroMultas << " multas." << endl;
 	} else {
 		cout
-				<< "No existe ninguna multa almacenada en la Base De Datos, gen�ralas y vuelve a intentarlo"
+				<< "No existe ninguna multa almacenada en la Base De Datos, generalas y vuelve a intentarlo"
 				<< endl;
 	}
 	cout << "Presione 0 para volver al menu principal" << endl;
@@ -160,7 +160,7 @@ void menus::verTotalPuntos(BaseDeDatos *bd, int numeroMultas) {
 				<< numeroMultas << " multas." << endl;
 	} else {
 		cout
-				<< "No existe ninguna multa almacenada en la Base De Datos, gen�ralas y vuelve a intentarlo"
+				<< "No existe ninguna multa almacenada en la Base De Datos, generalas y vuelve a intentarlo"
 				<< endl;
 	}
 	cout << "Presione 0 para volver al menu principal" << endl;
@@ -183,7 +183,7 @@ void menus::verMultasUsuario(BaseDeDatos *bd, int numeroMultas) {
 		bd->verMultas(matricula);
 	} else {
 		cout
-				<< "No existe ninguna multa almacenada en la Base De Datos, gen�ralas y vuelve a intentarlo"
+				<< "No existe ninguna multa almacenada en la Base De Datos, generalas y vuelve a intentarlo"
 				<< endl;
 	}
 	cout << "Presione 0 para volver al menu principal" << endl;
